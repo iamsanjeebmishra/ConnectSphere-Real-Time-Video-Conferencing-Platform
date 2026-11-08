@@ -876,7 +876,14 @@ export default function VideoMeetComponent() {
 
             socketRef.current.emit(
                 'join-call',
-                guestCredentialsRef.current
+                {
+                    ...guestCredentialsRef.current,
+                    mediaState: {
+                        audioEnabled: audio !== false && audioAvailable,
+                        videoEnabled: video !== false && videoAvailable,
+                        screenSharing: Boolean(screen)
+                    }
+                }
             );
 
         } catch (error) {
@@ -967,6 +974,47 @@ export default function VideoMeetComponent() {
                     setParticipants(updatedParticipants);
 
                     delete connections[id];
+                });
+
+                // Keep remote camera and microphone indicators synchronized.
+                socketRef.current.on('media-state', (payload = {}) => {
+                    const {
+                        socketId,
+                        audioEnabled,
+                        videoEnabled,
+                        screenSharing
+                    } = payload;
+
+                    if (!socketId) return;
+
+                    const updatedParticipants = {
+                        ...participantsRef.current,
+                        [socketId]: {
+                            ...(participantsRef.current[socketId] || {}),
+                            audioEnabled,
+                            videoEnabled,
+                            screenSharing
+                        }
+                    };
+
+                    participantsRef.current = updatedParticipants;
+                    setParticipants(updatedParticipants);
+
+                    setVideos(currentVideos => {
+                        const updatedVideos = currentVideos.map(remoteVideo =>
+                            remoteVideo.socketId === socketId
+                                ? {
+                                    ...remoteVideo,
+                                    audioEnabled,
+                                    videoEnabled,
+                                    screenSharing
+                                }
+                                : remoteVideo
+                        );
+
+                        videoRef.current = updatedVideos;
+                        return updatedVideos;
+                    });
                 });
 
                 socketRef.current.on(
@@ -1184,7 +1232,14 @@ export default function VideoMeetComponent() {
                     if (guestCredentialsRef.current) {
                         socketRef.current.emit(
                             'join-call',
-                            guestCredentialsRef.current
+                            {
+                                ...guestCredentialsRef.current,
+                                mediaState: {
+                                    audioEnabled: audio !== false && audioAvailable,
+                                    videoEnabled: video !== false && videoAvailable,
+                                    screenSharing: Boolean(screen)
+                                }
+                            }
                         );
                     }
                 });
@@ -1266,14 +1321,24 @@ export default function VideoMeetComponent() {
 
                 socketRef.current.emit('join-call', {
                     ...guestCredentialsRef.current,
-                    meetingCode
+                    meetingCode,
+                    mediaState: {
+                        audioEnabled: audio !== false && audioAvailable,
+                        videoEnabled: video !== false && videoAvailable,
+                        screenSharing: Boolean(screen)
+                    }
                 });
 
             } else {
                 guestJoinAttemptedRef.current = false;
 
                 socketRef.current.emit('join-call', {
-                    meetingCode
+                    meetingCode,
+                    mediaState: {
+                        audioEnabled: audio !== false && audioAvailable,
+                        videoEnabled: video !== false && videoAvailable,
+                        screenSharing: Boolean(screen)
+                    }
                 });
             }
         });
@@ -1511,6 +1576,23 @@ export default function VideoMeetComponent() {
     const microphoneEnabled =
         audio !== false && audioAvailable;
 
+    // Publish this browser's current media state only after it has joined the
+    // meeting. The backend relays it to the other participants in this room.
+    useEffect(() => {
+        if (
+            connectionStatus !== 'connected' ||
+            !socketRef.current?.connected
+        ) {
+            return;
+        }
+
+        socketRef.current.emit('media-state', {
+            audioEnabled: microphoneEnabled,
+            videoEnabled: cameraEnabled,
+            screenSharing: Boolean(screen)
+        });
+    }, [cameraEnabled, microphoneEnabled, screen, connectionStatus]);
+
     const participantCount = videos.length + 1;
     const isFocusView =
         meetingViewMode === 'focus' ||
@@ -1618,6 +1700,10 @@ export default function VideoMeetComponent() {
         const participant = participants[remoteVideo.socketId] || {};
         const participantName = remoteVideo.name || participant.name || 'Participant';
         const participantRole = remoteVideo.role || participant.role;
+        const remoteVideoEnabled =
+            participant.videoEnabled !== false || participant.screenSharing === true;
+        const remoteAudioEnabled = participant.audioEnabled !== false;
+        const participantInitial = participantName.trim().charAt(0).toUpperCase() || '👤';
 
         return (
             <div
@@ -1645,8 +1731,25 @@ export default function VideoMeetComponent() {
                     }}
                     autoPlay
                     playsInline
-                    style={{ transform: 'none', WebkitTransform: 'none' }}
+                    style={{
+                        transform: 'none',
+                        WebkitTransform: 'none'
+                    }}
                 />
+
+                {!remoteVideoEnabled && (
+                    <div className={styles.participantCameraOff}>
+                        <div className={styles.participantAvatar}>
+                            {participantInitial}
+                        </div>
+                    </div>
+                )}
+
+                {!remoteAudioEnabled && (
+                    <div className={styles.participantMuted}>
+                        <MicOffIcon />
+                    </div>
+                )}
 
                 <div className={styles.participantName}>
                     <span className={styles.participantStatusDot}></span>

@@ -1,4 +1,3 @@
-
 import { Server } from "socket.io";
 import { User } from "../models/user.model.js";
 import { MeetingRoom } from "../models/meetingRoom.model.js";
@@ -146,7 +145,8 @@ export const connectToSocket = (server) => {
                 const {
                     meetingCode,
                     participantId,
-                    guestToken
+                    guestToken,
+                    mediaState: requestedMediaState
                 } = payload || {};
 
                 if (
@@ -382,6 +382,18 @@ export const connectToSocket = (server) => {
                 socket.data.participantId =
                     participant?._id?.toString() || null;
 
+                // Media state is display metadata supplied by this participant.
+                // Default to enabled for older clients that do not send it yet.
+                socket.data.mediaState = {
+                    audioEnabled: typeof requestedMediaState?.audioEnabled === "boolean"
+                        ? requestedMediaState.audioEnabled
+                        : true,
+                    videoEnabled: typeof requestedMediaState?.videoEnabled === "boolean"
+                        ? requestedMediaState.videoEnabled
+                        : true,
+                    screenSharing: requestedMediaState?.screenSharing === true
+                };
+
 
                 // =========================================
                 // VERIFIED PARTICIPANT DETAILS
@@ -398,7 +410,13 @@ export const connectToSocket = (server) => {
 
                         participantDetails[id] = {
                             name: connectedSocket.data.displayName,
-                            role: connectedSocket.data.role
+                            role: connectedSocket.data.role,
+                            audioEnabled:
+                                connectedSocket.data.mediaState?.audioEnabled !== false,
+                            videoEnabled:
+                                connectedSocket.data.mediaState?.videoEnabled !== false,
+                            screenSharing:
+                                connectedSocket.data.mediaState?.screenSharing === true
                         };
                     }
                 });
@@ -545,6 +563,39 @@ export const connectToSocket = (server) => {
                 message
             );
 
+        });
+
+
+        // =========================================
+        // PARTICIPANT MEDIA STATE (CAMERA / MICROPHONE)
+        // =========================================
+
+        socket.on("media-state", (state = {}) => {
+            const room = socket.data.meetingCode;
+
+            if (
+                !room ||
+                !connections[room]?.includes(socket.id) ||
+                typeof state.audioEnabled !== "boolean" ||
+                typeof state.videoEnabled !== "boolean" ||
+                typeof state.screenSharing !== "boolean"
+            ) {
+                return;
+            }
+
+            const mediaState = {
+                audioEnabled: state.audioEnabled,
+                videoEnabled: state.videoEnabled,
+                screenSharing: state.screenSharing
+            };
+
+            socket.data.mediaState = mediaState;
+
+            // Exclude the sender; its own controls already reflect this state.
+            socket.to(room).emit("media-state", {
+                socketId: socket.id,
+                ...mediaState
+            });
         });
 
 
