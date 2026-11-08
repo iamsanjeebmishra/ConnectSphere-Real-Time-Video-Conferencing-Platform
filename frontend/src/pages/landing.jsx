@@ -91,7 +91,7 @@ export default function LandingPage() {
                             <button className="loginBtn" onClick={() => router("/auth")}>
                                 Login
                             </button>
-                            <button className="signupBtn" onClick={() => router("/auth")}>
+                            <button className="signupBtn" onClick={() => router("/auth?mode=signup")}>
                                 Sign Up
                             </button>
                         </>

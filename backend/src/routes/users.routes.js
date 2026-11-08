@@ -8,7 +8,8 @@ import {
     register,
     createMeeting,
     getSession,
-    logout
+    logout,
+    deleteAccount
 } from "../controllers/user.controller.js";
 
 import {
@@ -29,6 +30,9 @@ router.route("/register").post(register);
 // Browser session
 router.route("/session").get(getSession);
 router.route("/logout").post(logout);
+// Delete account and associated data
+router.route("/delete_account")
+    .delete(verifyToken, deleteAccount);
 
 // User meeting history (authenticated)
 router.route("/add_to_activity")

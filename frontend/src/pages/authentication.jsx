@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 
 import { AuthContext } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 
 // ConnectSphere camera-plus brand mark
@@ -74,7 +74,7 @@ function ConnectSphereMark({
 
 export default function Authentication() {
 
-    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -83,7 +83,10 @@ export default function Authentication() {
     const [error, setError] = React.useState("");
     const [message, setMessage] = React.useState("");
 
-    const [formState, setFormState] = React.useState(0);
+    // Open the registration form when the URL contains ?mode=signup.
+    const [formState, setFormState] = React.useState(
+        () => searchParams.get("mode") === "signup" ? 1 : 0
+    );
     const [showPassword, setShowPassword] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
     const [open, setOpen] = React.useState(false);
@@ -95,12 +98,21 @@ export default function Authentication() {
         React.useContext(AuthContext);
 
 
-    // Switch between Login and Signup
+    // Keep the selected form and URL mode in sync.
     const switchForm = (state) => {
         setFormState(state);
+        setSearchParams(
+            state === 1 ? { mode: "signup" } : {},
+            { replace: true }
+        );
         setError("");
         setPassword("");
     };
+
+    // Also respond if navigation changes the query string while this page is mounted.
+    React.useEffect(() => {
+        setFormState(searchParams.get("mode") === "signup" ? 1 : 0);
+    }, [searchParams]);
 
 
     // Login and Registration
@@ -143,7 +155,7 @@ export default function Authentication() {
                 setPassword("");
                 setName("");
 
-                setFormState(0);
+                switchForm(0);
             }
 
         } catch (err) {

@@ -314,6 +314,7 @@ const addToHistory = async (req, res) => {
 
 
 // DELETE USER ACCOUNT AND ASSOCIATED MEETING HISTORY
+
 const deleteAccount = async (req, res) => {
     try {
         const user = await getAuthenticatedUser(req);
@@ -324,10 +325,27 @@ const deleteAccount = async (req, res) => {
             });
         }
 
-        // Delete all meeting-history records belonging to this user.
+        // Delete the user's meeting history.
         await Meeting.deleteMany({
             user_id: user.username
         });
+
+        // Delete meeting rooms created by this user.
+        await MeetingRoom.deleteMany({
+            host: user._id
+        });
+
+        // Remove this user from meetings hosted by other users.
+        await MeetingRoom.updateMany(
+            { "participants.userId": user._id },
+            {
+                $pull: {
+                    participants: {
+                        userId: user._id
+                    }
+                }
+            }
+        );
 
         // Delete the user account.
         await User.deleteOne({
@@ -339,12 +357,10 @@ const deleteAccount = async (req, res) => {
             process.env.SESSION_COOKIE_NAME || "connect.sid";
 
         if (req.session) {
-            await new Promise((resolve) => {
-                req.session.destroy((error) => {
-                    if (error) {
-                        console.error("Session destruction error:", error);
-                    }
-                    resolve();
+            await new Promise((resolve, reject) => {
+                req.session.destroy(error => {
+                    if (error) reject(error);
+                    else resolve();
                 });
             });
         }
@@ -352,7 +368,7 @@ const deleteAccount = async (req, res) => {
         res.clearCookie(cookieName, { path: "/" });
 
         return res.status(httpStatus.OK).json({
-            message: "Account and meeting history deleted successfully"
+            message: "Account and associated data deleted successfully"
         });
 
     } catch (error) {
