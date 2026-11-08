@@ -248,15 +248,73 @@ const getUserHistory = async (req, res) => {
 
 
 // ADD MEETING TO USER HISTORY
-const addToHistory = async (req, res) => {
-    const { meeting_code } = req.body;
 
-    if (!meeting_code || typeof meeting_code !== "string") {
-        return res.status(httpStatus.BAD_REQUEST).json({
-            message: "Meeting code is required"
+const addToHistory = async (req, res) => {
+    try {
+        const { meeting_code } = req.body;
+
+        if (typeof meeting_code !== "string" || !meeting_code.trim()) {
+            return res.status(400).json({
+                message: "Meeting code is required"
+            });
+        }
+
+        const user = await getAuthenticatedUser(req);
+
+        if (!user) {
+            return res.status(401).json({
+                message: "Authentication required"
+            });
+        }
+
+        const meetingCode = meeting_code.trim();
+
+        const filter = {
+            user_id: user.username,
+            meetingCode
+        };
+
+        try {
+            await Meeting.updateOne(
+                filter,
+                {
+                    $setOnInsert: {
+                        user_id: user.username,
+                        meetingCode,
+                        date: new Date()
+                    }
+                },
+                { upsert: true }
+            );
+        } catch (error) {
+            // Handles simultaneous requests for the same meeting.
+            if (error.code !== 11000) {
+                throw error;
+            }
+
+            const existing = await Meeting.exists(filter);
+
+            if (!existing) {
+                throw error;
+            }
+        }
+
+        return res.status(200).json({
+            message: "Meeting history saved"
+        });
+
+    } catch (error) {
+        console.error("Add history error:", error);
+
+        return res.status(500).json({
+            message: "Unable to save meeting history"
         });
     }
+};
 
+
+// DELETE USER ACCOUNT AND ASSOCIATED MEETING HISTORY
+const deleteAccount = async (req, res) => {
     try {
         const user = await getAuthenticatedUser(req);
 
@@ -266,22 +324,42 @@ const addToHistory = async (req, res) => {
             });
         }
 
-        const newMeeting = new Meeting({
-            user_id: user.username,
-            meetingCode: meeting_code.trim()
+        // Delete all meeting-history records belonging to this user.
+        await Meeting.deleteMany({
+            user_id: user.username
         });
 
-        await newMeeting.save();
+        // Delete the user account.
+        await User.deleteOne({
+            _id: user._id
+        });
 
-        return res.status(httpStatus.CREATED).json({
-            message: "Added code to history"
+        // Destroy the current login session.
+        const cookieName =
+            process.env.SESSION_COOKIE_NAME || "connect.sid";
+
+        if (req.session) {
+            await new Promise((resolve) => {
+                req.session.destroy((error) => {
+                    if (error) {
+                        console.error("Session destruction error:", error);
+                    }
+                    resolve();
+                });
+            });
+        }
+
+        res.clearCookie(cookieName, { path: "/" });
+
+        return res.status(httpStatus.OK).json({
+            message: "Account and meeting history deleted successfully"
         });
 
     } catch (error) {
-        console.error("Add history error:", error);
+        console.error("Delete account error:", error);
 
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-            message: "Unable to add meeting to history"
+            message: "Unable to delete account"
         });
     }
 };
@@ -349,5 +427,6 @@ export {
     logout,
     getUserHistory,
     addToHistory,
-    createMeeting
+    createMeeting,
+    deleteAccount
 };
