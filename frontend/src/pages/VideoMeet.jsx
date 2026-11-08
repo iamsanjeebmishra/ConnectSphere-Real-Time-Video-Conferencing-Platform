@@ -45,7 +45,7 @@ const peerConfigConnections = {
 
 export default function VideoMeetComponent() {
 
-    const { userData } = useContext(AuthContext);
+    const { userData, addToUserHistory } = useContext(AuthContext);
 
     const socketRef = useRef();
     const socketIdRef = useRef();
@@ -85,6 +85,11 @@ export default function VideoMeetComponent() {
     const guestJoinAttemptedRef = useRef(false);
     const socketHandlersAttachedRef = useRef(false);
     const intentionalLeaveRef = useRef(false);
+
+    // Save this meeting once per mounted meeting page. This prevents duplicate
+    // history entries when Socket.IO reconnects or the guest rejoins this page.
+    const historySavedRef = useRef(false);
+    const historySavePendingRef = useRef(false);
 
     const [hasLeftMeeting, setHasLeftMeeting] = useState(false);
     const [hasRecoverySession, setHasRecoverySession] = useState(false);
@@ -182,6 +187,8 @@ export default function VideoMeetComponent() {
             setUsername(current => current || userData.name);
         }
 
+        // This is an initialization read from meeting-scoped localStorage.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userData]);
 
     // Keep one sender per media kind. replaceTrack switches between camera
@@ -308,9 +315,13 @@ export default function VideoMeetComponent() {
 
         await syncOutgoingStream();
 
-        // Stop old camera tracks only after peers have switched to the new ones.
+        // Stop old tracks only after peers have switched to the new ones.
+        // A track intentionally reused in the replacement stream (for example,
+        // the microphone while retrying camera access) must remain alive.
         if (previousStream && previousStream !== stream) {
+            const nextTracks = new Set(stream?.getTracks() || []);
             previousStream.getTracks().forEach(track => {
+                if (nextTracks.has(track)) return;
                 track.onended = null;
                 if (track.readyState !== 'ended') track.stop();
             });
@@ -350,11 +361,13 @@ export default function VideoMeetComponent() {
 
             stopLocalMedia();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Request camera and microphone permissions.
     useEffect(() => {
         getPermissions();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const stopLocalMedia = () => {
@@ -419,7 +432,7 @@ export default function VideoMeetComponent() {
         closePeerConnections();
     };
 
-    const handleRejoinMeeting = () => {
+    const handleRejoinMeeting = async () => {
         intentionalLeaveRef.current = false;
 
         guestJoinAttemptedRef.current =
@@ -428,13 +441,18 @@ export default function VideoMeetComponent() {
         socketHandlersAttachedRef.current = false;
 
         setJoinError('');
-        setHasLeftMeeting(false);
-        setAskForUsername(false);
         setWaitingForApproval(false);
         setConnectionStatus('connecting');
 
         closePeerConnections();
-        getMedia();
+
+        // Leaving the meeting stops the old tracks. Reacquire media before the
+        // new socket joins so the peer setup does not start with a black stream.
+        await getUserMedia({ retryUnavailable: true });
+
+        setHasLeftMeeting(false);
+        setAskForUsername(false);
+        connectToSocketServer();
     };
 
     const handleReturnHome = () => {
@@ -447,53 +465,115 @@ export default function VideoMeetComponent() {
         window.location.href = '/';
     };
 
+    // Acquire the camera and microphone without opening and stopping several
+    // probe streams first. Safari can be sensitive to rapid repeated capture
+    // requests, especially when another browser window was just using the camera.
+    const acquireMediaStream = async ({ video: wantVideo, audio: wantAudio }) => {
+        const requestedVideo = Boolean(wantVideo);
+        const requestedAudio = Boolean(wantAudio);
+
+        if (!requestedVideo && !requestedAudio) {
+            return {
+                stream: new MediaStream(),
+                videoError: null,
+                audioError: null
+            };
+        }
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: requestedVideo,
+                audio: requestedAudio
+            });
+
+            return { stream, videoError: null, audioError: null };
+        } catch (combinedError) {
+            console.warn('Combined camera/microphone request failed; trying devices separately:', combinedError);
+
+            const tracks = [];
+            let videoError = requestedVideo ? combinedError : null;
+            let audioError = requestedAudio ? combinedError : null;
+
+            if (requestedVideo) {
+                try {
+                    const videoStream = await navigator.mediaDevices.getUserMedia({
+                        video: true,
+                        audio: false
+                    });
+                    tracks.push(...videoStream.getVideoTracks());
+                    videoError = null;
+                } catch (error) {
+                    videoError = error;
+                    console.error('Camera access failed:', error);
+                }
+            }
+
+            if (requestedAudio) {
+                try {
+                    const audioStream = await navigator.mediaDevices.getUserMedia({
+                        video: false,
+                        audio: true
+                    });
+                    tracks.push(...audioStream.getAudioTracks());
+                    audioError = null;
+                } catch (error) {
+                    audioError = error;
+                    console.error('Microphone access failed:', error);
+                }
+            }
+
+            return {
+                stream: new MediaStream(tracks),
+                videoError,
+                audioError
+            };
+        }
+    };
+
     const getPermissions = async () => {
-        let canUseVideo = false;
-        let canUseAudio = false;
+        setScreenAvailable(Boolean(navigator.mediaDevices?.getDisplayMedia));
 
-        try {
-            const videoPermission = await navigator.mediaDevices.getUserMedia({
-                video: true
-            });
-            canUseVideo = Boolean(videoPermission);
-            videoPermission.getTracks().forEach(track => track.stop());
-        } catch (error) {
-            console.log('Camera permission unavailable:', error);
+        if (!navigator.mediaDevices?.getUserMedia) {
+            setVideoAvailable(false);
+            setAudioAvailable(false);
+            setJoinError('This browser does not support camera and microphone access.');
+            return;
         }
 
-        try {
-            const audioPermission = await navigator.mediaDevices.getUserMedia({
-                audio: true
-            });
-            canUseAudio = Boolean(audioPermission);
-            audioPermission.getTracks().forEach(track => track.stop());
-        } catch (error) {
-            console.log('Microphone permission unavailable:', error);
-        }
+        const { stream, videoError } = await acquireMediaStream({
+            video: true,
+            audio: true
+        });
 
-        setVideoAvailable(canUseVideo);
-        setAudioAvailable(canUseAudio);
-        setScreenAvailable(Boolean(navigator.mediaDevices.getDisplayMedia));
+        const hasLiveVideo = stream.getVideoTracks().some(
+            track => track.readyState === 'live'
+        );
+        const hasLiveAudio = stream.getAudioTracks().some(
+            track => track.readyState === 'live'
+        );
 
-        if (!canUseVideo && !canUseAudio) return;
+        setVideoAvailable(hasLiveVideo);
+        setAudioAvailable(hasLiveAudio);
 
-        try {
-            const userMediaStream = await navigator.mediaDevices.getUserMedia({
-                video: canUseVideo,
-                audio: canUseAudio
-            });
-            await updateCameraStream(userMediaStream);
-        } catch (error) {
-            console.error('Unable to access camera/microphone:', error);
+        await updateCameraStream(
+            hasLiveVideo || hasLiveAudio ? stream : null
+        );
+
+        if (!hasLiveVideo && videoError) {
+            setJoinError(
+                `Camera is unavailable: ${videoError.message || 'check browser permissions and whether another app is using it.'}`
+            );
+        } else {
+            setJoinError('');
         }
     };
 
     useEffect(() => {
         if (video !== undefined && audio !== undefined) {
             getUserMedia();
-
-            console.log('SET STATE HAS', video, audio);
         }
+        // getUserMedia reads the latest media availability flags and refs.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [video, audio]);
 
     const getMedia = () => {
@@ -507,23 +587,61 @@ export default function VideoMeetComponent() {
         await updateCameraStream(stream);
     };
 
-    const getUserMedia = async () => {
+    const getUserMedia = async ({ retryUnavailable = false } = {}) => {
         const constraints = {
-            video: Boolean(video && videoAvailable),
-            audio: Boolean(audio && audioAvailable)
+            video: video !== false && (videoAvailable || retryUnavailable),
+            audio: audio !== false && (audioAvailable || retryUnavailable)
         };
 
         if (!constraints.video && !constraints.audio) {
             await updateCameraStream(null);
-            return;
+            return true;
         }
 
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            await getUserMediaSuccess(stream);
-        } catch (error) {
-            console.error('Unable to update camera/microphone:', error);
+        const currentStream = cameraStreamRef.current;
+        const currentHasVideo = Boolean(
+            currentStream?.getVideoTracks().some(track => track.readyState === 'live')
+        );
+        const currentHasAudio = Boolean(
+            currentStream?.getAudioTracks().some(track => track.readyState === 'live')
+        );
+
+        // Reuse a healthy stream rather than immediately opening the same
+        // camera again after the pre-join permission request.
+        if (
+            currentHasVideo === constraints.video &&
+            currentHasAudio === constraints.audio
+        ) {
+            await syncOutgoingStream();
+            return true;
         }
+
+        const { stream, videoError } = await acquireMediaStream(constraints);
+        const hasLiveVideo = stream.getVideoTracks().some(
+            track => track.readyState === 'live'
+        );
+        const hasLiveAudio = stream.getAudioTracks().some(
+            track => track.readyState === 'live'
+        );
+
+        if (retryUnavailable) {
+            if (constraints.video) setVideoAvailable(hasLiveVideo);
+            if (constraints.audio) setAudioAvailable(hasLiveAudio);
+        }
+
+        await getUserMediaSuccess(
+            hasLiveVideo || hasLiveAudio ? stream : null
+        );
+
+        if (constraints.video && !hasLiveVideo && videoError) {
+            setJoinError(
+                `Camera is unavailable: ${videoError.message || 'check browser permissions and whether another app is using it.'}`
+            );
+        } else if (hasLiveVideo) {
+            setJoinError('');
+        }
+
+        return hasLiveVideo || hasLiveAudio;
     };
 
     const getDislayMedia = async () => {
@@ -974,33 +1092,13 @@ export default function VideoMeetComponent() {
 
                         // Only the newly joined participant creates offers.
                         if (id === socketIdRef.current) {
-                            for (let id2 of clients) {
+                            for (const peerId of clients) {
                                 if (
-                                    id2 === socketIdRef.current ||
-                                    !connections[id2]
+                                    peerId === socketIdRef.current ||
+                                    !connections[peerId]
                                 ) continue;
 
-                                connections[id2]
-                                    .createOffer()
-                                    .then(description => {
-                                        return connections[id2]
-                                            .setLocalDescription(description);
-                                    })
-                                    .then(() => {
-                                        socketRef.current.emit(
-                                            'signal',
-                                            id2,
-                                            JSON.stringify({
-                                                sdp: connections[id2].localDescription
-                                            })
-                                        );
-                                    })
-                                    .catch(error =>
-                                        console.log(
-                                            'WebRTC offer error:',
-                                            error
-                                        )
-                                    );
+                                sendPeerOffer(peerId);
                             }
                         }
                     }
@@ -1036,6 +1134,40 @@ export default function VideoMeetComponent() {
 
                     if (data?.role === 'host') {
                         fetchWaitingParticipants();
+                    }
+
+                    // Meeting history is stored through the authenticated
+                    // REST endpoint exposed by AuthContext. Socket.IO joining
+                    // alone does not create a Meeting history document.
+                    const joinedMeetingCode =
+                        data?.meetingCode || getMeetingCode();
+
+                    if (
+                        userData?.username &&
+                        joinedMeetingCode &&
+                        !historySavedRef.current &&
+                        !historySavePendingRef.current &&
+                        typeof addToUserHistory === 'function'
+                    ) {
+                        historySavePendingRef.current = true;
+
+                        addToUserHistory(joinedMeetingCode)
+                            .then(() => {
+                                historySavedRef.current = true;
+                                console.log(
+                                    'Meeting history saved:',
+                                    joinedMeetingCode
+                                );
+                            })
+                            .catch(error => {
+                                console.error(
+                                    'Unable to save meeting history:',
+                                    error?.response?.data || error
+                                );
+                            })
+                            .finally(() => {
+                                historySavePendingRef.current = false;
+                            });
                     }
 
                     console.log('Joined meeting:', data);
@@ -1184,7 +1316,42 @@ export default function VideoMeetComponent() {
         );
     };
 
-    const handleVideo = () => {
+    const handleVideo = async () => {
+        // Keep the camera button usable when the initial permission request
+        // failed, so the user can retry after closing another app/browser tab.
+        if (!videoAvailable) {
+            try {
+                const { stream, videoError } = await acquireMediaStream({
+                    video: true,
+                    audio: false
+                });
+                const videoTrack = stream.getVideoTracks().find(
+                    track => track.readyState === 'live'
+                );
+
+                if (!videoTrack) {
+                    throw videoError || new Error('No active camera video track was returned.');
+                }
+
+                const existingAudioTrack = cameraStreamRef.current
+                    ?.getAudioTracks()
+                    .find(track => track.readyState === 'live');
+                const tracks = [videoTrack];
+                if (existingAudioTrack) tracks.push(existingAudioTrack);
+
+                await updateCameraStream(new MediaStream(tracks));
+                setVideoAvailable(true);
+                setVideo(true);
+                setJoinError('');
+            } catch (error) {
+                console.error('Unable to retry camera access:', error);
+                setJoinError(
+                    `Unable to access camera: ${error.message || 'check Safari camera permissions and close other apps using the camera.'}`
+                );
+            }
+            return;
+        }
+
         setVideo(current =>
             current === false ? videoAvailable : false
         );
@@ -1593,7 +1760,6 @@ export default function VideoMeetComponent() {
                                         !cameraEnabled ? styles.deviceOff : ''
                                     }`}
                                     onClick={handleVideo}
-                                    disabled={!videoAvailable}
                                 >
                                     {cameraEnabled
                                         ? <VideocamIcon />
