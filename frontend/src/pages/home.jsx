@@ -347,8 +347,8 @@ function HomeComponent() {
                                 </div>
 
                                 <div className="previewPerson personThree">
-                                    <div className="avatar avatarThree">P</div>
-                                    <span>Priya</span>
+                                    <div className="avatar avatarThree">M</div>
+                                    <span>Marie</span>
                                 </div>
 
                                 <div className="previewPerson personFour">

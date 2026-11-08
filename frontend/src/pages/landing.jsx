@@ -158,8 +158,8 @@ export default function LandingPage() {
                                         <span className="participantName">John</span>
                                     </div>
                                     <div className="videoTile tileFour">
-                                        <div className="personAvatar">P</div>
-                                        <span className="participantName">Priya</span>
+                                        <div className="personAvatar">M</div>
+                                        <span className="participantName">Marie</span>
                                     </div>
                                 </div>
                                 <div className="meetingControls" aria-hidden="true">
