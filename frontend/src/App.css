@@ -1,0 +1,2725 @@
+
+/* =========================================
+   CONNECTSPHERE - LANDING PAGE
+========================================= */
+
+.landingPageContainer {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    color: #111827;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background decoration */
+
+.landingPageContainer::before {
+    content: "";
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    right: -180px;
+    bottom: -400px;
+    background: #e8f3ff;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.landingPageContainer::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        #edf6ff,
+        #ffffff,
+        #e9f2ff
+    );
+    clip-path: ellipse(70% 100% at 50% 100%);
+    pointer-events: none;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.landingNavbar {
+    width: 100%;
+    min-height: 90px;
+    padding: 0 5.3%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 5;
+    background: transparent;
+}
+
+.landingNavbar .navHeader {
+    display: flex;
+    align-items: center;
+}
+
+.brandLogo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #111827;
+    font-size: 29px;
+    font-weight: 750;
+    letter-spacing: -1.2px;
+}
+
+.brandIcon {
+    font-size: 35px;
+}
+
+.brandBlue {
+    color: #1769ff;
+}
+
+.landingNavbar .navlist {
+    display: flex;
+    align-items: center;
+    gap: 42px;
+}
+
+.landingNavbar .navlist a {
+    color: #263247;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+    padding: 10px 0;
+    transition: color 0.2s ease;
+}
+
+.landingNavbar .navlist a:hover,
+.landingNavbar .navlist a.active {
+    color: #1769ff;
+}
+
+.landingNavbar .navlist a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #1769ff;
+    border-radius: 10px;
+}
+
+.navActions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.loginBtn,
+.signupBtn {
+    min-width: 120px;
+    padding: 15px 27px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.loginBtn {
+    color: #1769ff;
+    background: white;
+    border: 1.5px solid #1769ff;
+}
+
+.loginBtn:hover {
+    background: #eff6ff;
+}
+
+.signupBtn {
+    color: white;
+    background: #1769ff;
+    border: 1.5px solid #1769ff;
+    box-shadow: 0 5px 15px rgba(23, 105, 255, 0.15);
+}
+
+.signupBtn:hover {
+    background: #0755df;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.landingMainContainer {
+    width: 100%;
+    max-width: 1600px;
+    min-height: 650px;
+    margin: 0 auto;
+    padding: 35px 5.3% 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.heroContent {
+    flex: 1;
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
+}
+
+.heroBadge {
+    display: inline-block;
+    padding: 12px 23px;
+    border-radius: 30px;
+    background: #eaf2ff;
+    color: #1769ff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 27px;
+}
+
+.heroContent h1 {
+    color: #111827;
+    font-size: clamp(48px, 5.2vw, 78px);
+    line-height: 1.04;
+    letter-spacing: -3.5px;
+    font-weight: 800;
+    margin: 0 0 22px;
+}
+
+.heroContent h1 span {
+    color: #1769ff;
+}
+
+.heroDescription {
+    color: #526078;
+    font-size: 19px;
+    line-height: 1.65;
+    max-width: 610px;
+    margin-bottom: 32px;
+}
+
+.heroButtons {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.startMeetingBtn,
+.joinMeetingBtn {
+    min-height: 64px;
+    padding: 0 29px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.startMeetingBtn {
+    background: #1769ff;
+    border: 1.5px solid #1769ff;
+    color: white;
+    box-shadow: 0 8px 18px rgba(23, 105, 255, 0.18);
+}
+
+.startMeetingBtn:hover {
+    background: #0755df;
+    transform: translateY(-3px);
+}
+
+.joinMeetingBtn {
+    background: white;
+    border: 1.5px solid #1769ff;
+    color: #1769ff;
+}
+
+.joinMeetingBtn:hover {
+    background: #eff6ff;
+    transform: translateY(-3px);
+}
+
+.startMeetingBtn span,
+.joinMeetingBtn span {
+    font-size: 23px;
+}
+
+
+/* =========================================
+   HERO VISUAL / LAPTOP
+========================================= */
+
+.heroVisual {
+    flex: 1.15;
+    min-width: 0;
+    min-height: 570px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.visualCircle {
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.visualCircleBlue {
+    width: 360px;
+    height: 360px;
+    background: linear-gradient(
+        135deg,
+        #a9e7ff,
+        #d3e9ff
+    );
+    top: 55px;
+    left: 5%;
+}
+
+.visualCirclePurple {
+    width: 560px;
+    height: 560px;
+    background: linear-gradient(
+        135deg,
+        #a6bcff,
+        #e5baff
+    );
+    top: 0;
+    right: 2%;
+    opacity: 0.8;
+}
+
+.meetingLaptop {
+    width: 90%;
+    max-width: 690px;
+    position: relative;
+    z-index: 2;
+    margin-top: 40px;
+}
+
+.laptopScreen {
+    width: 88%;
+    margin: auto;
+    padding: 16px;
+    background: #111827;
+    border: 5px solid #263244;
+    border-radius: 22px 22px 8px 8px;
+    box-shadow: 0 20px 35px rgba(24, 45, 90, 0.2);
+}
+
+.videoGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 7px;
+}
+
+.videoTile {
+    min-height: 145px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tileOne {
+    background: linear-gradient(135deg, #b9d5dc, #738a9a);
+}
+
+.tileTwo {
+    background: linear-gradient(135deg, #e7c8b4, #7f9c8d);
+}
+
+.tileThree {
+    background: linear-gradient(135deg, #b6d0d9, #687f96);
+}
+
+.tileFour {
+    background: linear-gradient(135deg, #e8d2c1, #b1a4a1);
+}
+
+.personAvatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 38px;
+    font-weight: 700;
+    background: rgba(23, 105, 255, 0.65);
+    border: 4px solid rgba(255, 255, 255, 0.6);
+}
+
+.tileTwo .personAvatar {
+    background: #b77b80;
+}
+
+.tileThree .personAvatar {
+    background: #4d7890;
+}
+
+.tileFour .personAvatar {
+    background: #8e6e9f;
+}
+
+.participantName {
+    position: absolute;
+    left: 10px;
+    bottom: 9px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+}
+
+.meetingControls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    padding: 17px 0 7px;
+}
+
+.meetingControls span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #303846;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 17px;
+}
+
+.meetingControls .endCall {
+    background: #f04444;
+    width: 48px;
+    height: 48px;
+}
+
+.laptopBase {
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(
+        to bottom,
+        #aab3c0,
+        #687384,
+        #dce3ec
+    );
+    border-radius: 2px 2px 18px 18px;
+    box-shadow: 0 12px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   FLOATING CARDS
+========================================= */
+
+.floatingCard {
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(30, 60, 120, 0.13);
+    color: #182337;
+}
+
+.floatingCard strong {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.floatingIcon {
+    width: 43px;
+    height: 43px;
+    border-radius: 50%;
+    background: #eaf2ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+.teamCard {
+    top: 45px;
+    right: 0;
+}
+
+.teamCard div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.teamCard small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.chatCard {
+    left: -2%;
+    top: 55%;
+}
+
+.chatCard .floatingIcon {
+    background: #d9fbea;
+}
+
+.ideasCard {
+    right: -3%;
+    top: 42%;
+}
+
+.ideasCard .floatingIcon {
+    background: #fff2c9;
+}
+
+
+/* =========================================
+   FEATURE SECTION
+========================================= */
+
+.landingFeatures {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 35px 5.3% 55px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+}
+
+.featureIcon {
+    width: 75px;
+    height: 75px;
+    min-width: 75px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.secureIcon {
+    background: #dff9eb;
+}
+
+.easyIcon {
+    background: #e4efff;
+}
+
+.qualityIcon {
+    background: #ffe8eb;
+}
+
+.anywhereIcon {
+    background: #f0e7ff;
+}
+
+.featureItem h3 {
+    font-size: 17px;
+    color: #172033;
+    margin: 0 0 7px;
+}
+
+.featureItem p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   EXISTING MEETING PAGE STYLES
+   PRESERVED
+========================================= */
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 20px;
+    text-align: center;
+}
+
+.meetContainer {
+    display: flex;
+    padding-inline: 20px;
+    height: 80vh;
+    gap: 10vw;
+    justify-content: center;
+}
+
+.leftPanel {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.rightPanel {
+    display: flex;
+    align-items: center;
+}
+
+.rightPanel > img {
+    width: 30vw;
+    height: auto;
+    border-radius: 20px;
+}
+
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media screen and (max-width: 1100px) {
+
+    .landingNavbar {
+        padding: 0 3%;
+    }
+
+    .landingNavbar .navlist {
+        gap: 20px;
+    }
+
+    .landingMainContainer {
+        padding: 30px 3%;
+    }
+
+    .heroContent h1 {
+        font-size: 55px;
+    }
+
+    .heroVisual {
+        min-height: 470px;
+    }
+
+    .videoTile {
+        min-height: 110px;
+    }
+
+    .visualCirclePurple {
+        width: 430px;
+        height: 430px;
+    }
+
+    .landingFeatures {
+        grid-template-columns: repeat(2, 1fr);
+        padding-inline: 5%;
+    }
+
+    .chatCard {
+        left: -5%;
+    }
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media screen and (max-width: 768px) {
+
+    .landingNavbar {
+        min-height: 75px;
+        padding: 12px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .brandLogo {
+        font-size: 23px;
+    }
+
+    .brandIcon {
+        font-size: 28px;
+    }
+
+    .landingNavbar .navlist {
+        display: none;
+    }
+
+    .navActions {
+        gap: 8px;
+    }
+
+    .loginBtn,
+    .signupBtn {
+        min-width: auto;
+        padding: 10px 17px;
+        font-size: 13px;
+        border-radius: 11px;
+    }
+
+    .landingMainContainer {
+        flex-direction: column;
+        padding: 45px 6% 10px;
+        gap: 15px;
+        min-height: auto;
+    }
+
+    .heroContent {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .heroBadge {
+        font-size: 13px;
+        padding: 9px 15px;
+        margin-bottom: 20px;
+    }
+
+    .heroContent h1 {
+        font-size: clamp(43px, 10vw, 65px);
+        letter-spacing: -2px;
+    }
+
+    .heroDescription {
+        font-size: 16px;
+    }
+
+    .heroButtons {
+        gap: 12px;
+    }
+
+    .startMeetingBtn,
+    .joinMeetingBtn {
+        min-height: 54px;
+        padding: 0 18px;
+        font-size: 14px;
+    }
+
+    .heroVisual {
+        width: 100%;
+        min-height: 370px;
+        margin-top: 15px;
+    }
+
+    .meetingLaptop {
+        width: 90%;
+    }
+
+    .laptopScreen {
+        padding: 8px;
+    }
+
+    .videoTile {
+        min-height: 85px;
+    }
+
+    .personAvatar {
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+    }
+
+    .meetingControls {
+        gap: 7px;
+    }
+
+    .meetingControls span {
+        width: 30px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    .meetingControls .endCall {
+        width: 35px;
+        height: 35px;
+    }
+
+    .visualCircleBlue {
+        width: 230px;
+        height: 230px;
+    }
+
+    .visualCirclePurple {
+        width: 300px;
+        height: 300px;
+    }
+
+    .floatingCard {
+        padding: 9px 12px;
+        gap: 7px;
+        border-radius: 13px;
+    }
+
+    .floatingCard strong {
+        font-size: 10px;
+    }
+
+    .floatingIcon {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .teamCard {
+        top: 5px;
+        right: 0;
+    }
+
+    .chatCard {
+        left: -2%;
+        top: 65%;
+    }
+
+    .ideasCard {
+        right: -2%;
+        top: 42%;
+    }
+
+    .teamCard small {
+        font-size: 9px;
+    }
+
+    .landingFeatures {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 25px 6% 45px;
+        gap: 22px 12px;
+    }
+
+    .featureItem {
+        gap: 10px;
+    }
+
+    .featureIcon {
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        font-size: 19px;
+    }
+
+    .featureItem h3 {
+        font-size: 12px;
+    }
+
+    .featureItem p {
+        font-size: 10px;
+        white-space: normal;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media screen and (max-width: 400px) {
+
+    .brandLogo {
+        font-size: 19px;
+    }
+
+    .brandIcon {
+        font-size: 23px;
+    }
+
+    .navActions {
+        gap: 6px;
+    }
+
+    .loginBtn,
+    .signupBtn {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .heroContent h1 {
+        font-size: 40px;
+    }
+
+    .heroButtons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .startMeetingBtn,
+    .joinMeetingBtn {
+        width: 100%;
+    }
+
+    .landingFeatures {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ===========================
+   HOME DASHBOARD
+=========================== */
+
+.homePage {
+    min-height: 100vh;
+    background: #f8faff;
+    color: #172033;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+
+.homeNavbar {
+    height: 78px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #edf0f6;
+}
+
+.homeBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.homeBrand h2 {
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -1px;
+    color: #172033;
+}
+
+.homeBrand h2 span {
+    color: #5865e8;
+}
+
+.brandIcon {
+    width: 39px;
+    height: 39px;
+    border-radius: 12px;
+    background: #5A65E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.brandIcon svg {
+    font-size: 25px;
+}
+
+.homeNavActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.homeNavActions .historyButton {
+    color: #424b61;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.homeNavActions .logoutButton {
+    color: #5865e8;
+    text-transform: none;
+    border: 1px solid #e0e5ff;
+    border-radius: 9px;
+    padding: 8px 16px;
+}
+
+/* Main */
+
+.homeMain {
+    width: 86%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+/* Welcome section */
+
+.welcomeSection {
+    min-height: 470px;
+    margin-top: 45px;
+    padding: 50px 55px;
+    border-radius: 25px;
+    background: linear-gradient(120deg, #edf0ff, #f4f5ff 55%, #e9edff);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.welcomeContent {
+    width: 53%;
+    z-index: 1;
+}
+
+.welcomeTag {
+    display: inline-block;
+    background: #ffffff;
+    color: #5865e8;
+    padding: 9px 15px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1px;
+}
+
+.welcomeContent h1 {
+    margin: 24px 0 15px;
+    font-size: clamp(36px, 4vw, 55px);
+    line-height: 1.12;
+    letter-spacing: -2px;
+    color: #19223b;
+}
+
+.welcomeContent h1 span {
+    color: #5865e8;
+}
+
+.welcomeContent > p {
+    max-width: 460px;
+    color: #68738b;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+
+/* Meeting input */
+
+.meetingInputSection {
+    display: flex;
+    gap: 12px;
+    max-width: 520px;
+}
+
+.meetingCodeInput {
+    background: white;
+    border-radius: 10px;
+}
+
+.meetingCodeInput .MuiOutlinedInput-root {
+    border-radius: 10px;
+}
+
+.joinMeetingButton {
+    min-width: 115px !important;
+    border-radius: 10px !important;
+    background: #5865e8 !important;
+    text-transform: none !important;
+    font-weight: 650 !important;
+    box-shadow: 0 5px 15px rgba(88, 101, 232, 0.2) !important;
+}
+
+.joinMeetingButton:hover {
+    background: #4552d5 !important;
+}
+
+.meetingHint {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #7b8498;
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+.hintDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #31bd85;
+}
+
+/* =========================================
+   HOME DASHBOARD - VIDEO MEETING PREVIEW
+========================================= */
+.welcomeIllustration {
+    width: 43%;
+    min-height: 370px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.meetingPreview {
+    width: 100%;
+    max-width: 420px;
+    padding: 18px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid #edf0ff;
+    box-shadow: 0 25px 65px rgba(64, 77, 160, .13);
+    transform: rotate(-2deg);
+    position: relative;
+    z-index: 1;
+}
+
+.previewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+    color: #26304b;
+    font-size: 12px;
+    font-weight: 700;
+}
+.previewHeader > div { display: flex; align-items: center; gap: 8px; }
+.liveDot {
+    width: 8px; height: 8px; background: #29c78b;
+    border-radius: 50%; box-shadow: 0 0 0 4px #e6faf2;
+}
+.previewTime { color: #8b93a8; font-weight: 500; }
+
+.previewGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+.previewPerson {
+    height: 120px;
+    border-radius: 13px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+}
+.personOne { background: linear-gradient(135deg, #e4e8ff, #cbd3ff); }
+.personTwo { background: linear-gradient(135deg, #fbe5e8, #f5d3df); }
+.personThree { background: linear-gradient(135deg, #e1f4f0, #c8e9e3); }
+.personFour { background: linear-gradient(135deg, #f8eddb, #f2dfc0); }
+.avatar {
+    width: 53px; height: 53px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 22px; font-weight: 700;
+    box-shadow: 0 5px 15px rgba(40, 45, 90, .13);
+}
+.avatarOne { background: linear-gradient(135deg, #5865e8, #818cf8); }
+.avatarTwo { background: linear-gradient(135deg, #e47c9a, #f4a5b9); }
+.avatarThree { background: linear-gradient(135deg, #239f8a, #58c5a8); }
+.avatarFour { background: linear-gradient(135deg, #d79a48, #f0bf75); }
+.previewPerson > span { font-size: 10px; color: #333e58; font-weight: 700; }
+.micStatus {
+    position: absolute; top: 8px; right: 8px; font-size: 11px;
+    background: rgba(255,255,255,.8); border-radius: 7px; padding: 4px;
+}
+
+.previewControls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 18px; padding-top: 18px;
+}
+.previewControls span {
+    width: 34px; height: 34px; display: flex;
+    justify-content: center; align-items: center;
+    background: #f0f2ff; color: #5865e8;
+    border-radius: 50%; font-size: 14px;
+}
+.previewControls .endCall {
+    background: #f0445d; color: white; transform: rotate(135deg);
+}
+
+.floatingInfoCard {
+    position: absolute; bottom: 30px; left: -35px;
+    background: white; padding: 13px 17px; border-radius: 13px;
+    box-shadow: 0 8px 30px rgba(45,55,90,.12);
+    display: flex; align-items: center; gap: 12px; z-index: 2;
+}
+.floatingInfoIcon {
+    width: 38px; height: 38px; background: #edf0ff; color: #5865e8;
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center;
+}
+.floatingInfoCard strong, .floatingInfoCard span { display: block; }
+.floatingInfoCard strong { font-size: 13px; color: #202941; }
+.floatingInfoCard span { font-size: 11px; color: #8992a5; margin-top: 4px; }
+
+.floatingPeople {
+    position: absolute; top: 30px; right: -15px;
+    display: flex; align-items: center; background: white;
+    padding: 10px 14px; border-radius: 30px;
+    box-shadow: 0 8px 25px rgba(45,55,90,.1); z-index: 2;
+}
+.miniAvatar {
+    width: 27px; height: 27px; border-radius: 50%;
+    border: 2px solid white; display: flex; align-items: center;
+    justify-content: center; color: white; font-size: 10px;
+    font-weight: 700; margin-left: -5px;
+}
+.miniOne { background: #5A65E0; }
+.miniTwo { background: #e47c9a; }
+.miniThree { background: #239f8a; }
+.floatingPeople span {
+    font-size: 10px; color: #5865e8; font-weight: 700; margin-left: 7px;
+}
+
+/* Quick Actions */
+
+.quickActions {
+    margin-top: 55px;
+}
+
+.quickActionHeading h2 {
+    font-size: 25px;
+    color: #19223b;
+    margin-bottom: 8px;
+}
+
+.quickActionHeading p {
+    color: #818ba0;
+    font-size: 14px;
+}
+
+.actionCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.actionCard {
+    background: white;
+    padding: 27px;
+    border: 1px solid #edf0f6;
+    border-radius: 17px;
+    transition: 0.25s ease;
+}
+
+.actionCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(35, 45, 80, 0.07);
+}
+
+.actionIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    background: #edf0ff;
+    color: #5865e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionIcon svg {
+    font-size: 25px;
+}
+
+.actionCard h3 {
+    font-size: 17px;
+    margin: 20px 0 10px;
+    color: #202941;
+}
+
+.actionCard p {
+    color: #8790a3;
+    font-size: 13px;
+    line-height: 1.7;
+    min-height: 45px;
+}
+
+.actionCard button {
+    border: none;
+    background: none;
+    color: #5865e8;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 0;
+    margin-top: 17px;
+}
+
+.actionCard button svg {
+    font-size: 17px;
+}
+
+.comingSoonLabel {
+    display: inline-block;
+    margin-top: 17px;
+    color: #9a85d9;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.homeFooter {
+    text-align: center;
+    padding: 40px 0 25px;
+    color: #9aa2b3;
+    font-size: 12px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .homeMain {
+        width: 92%;
+    }
+
+    .welcomeSection {
+        padding: 40px 30px;
+    }
+
+    .welcomeContent {
+        width: 58%;
+    }
+
+    .welcomeIllustration {
+        width: 40%;
+    }
+
+    .actionCards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .homeNavbar {
+        padding: 0 5%;
+        height: 68px;
+    }
+
+    .homeBrand h2 {
+        font-size: 19px;
+    }
+
+    .homeNavActions {
+        gap: 2px;
+    }
+
+    .homeNavActions .historyButton,
+    .homeNavActions .logoutButton {
+        font-size: 12px;
+        padding: 6px;
+        min-width: auto;
+    }
+
+    .homeMain {
+        width: 92%;
+    }
+
+    .welcomeSection {
+        margin-top: 22px;
+        padding: 32px 22px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .welcomeContent {
+        width: 100%;
+    }
+
+    .welcomeContent h1 {
+        font-size: 39px;
+    }
+
+    .welcomeContent > p {
+        font-size: 14px;
+    }
+
+    .meetingInputSection {
+        flex-direction: column;
+    }
+
+    .joinMeetingButton {
+        min-height: 48px;
+    }
+
+    .welcomeIllustration {
+        width: 100%;
+        min-height: 310px;
+        margin-top: 25px;
+    }
+
+    .meetingPreview {
+        max-width: 350px;
+    }
+
+    .floatingInfoCard {
+        bottom: 0;
+        left: -5px;
+    }
+
+    .floatingPeople {
+        top: 5px;
+        right: -5px;
+    }
+
+    .actionCards {
+        grid-template-columns: 1fr;
+    }
+
+    .quickActions {
+        margin-top: 35px;
+    }
+}
+/* =========================================================
+   CONNECTSPHERE ONE-PAGE LANDING PAGE - EXTENDED SECTIONS
+   Scoped to landing page classes to preserve other screens.
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+.landingPageContainer {
+    overflow-x: clip;
+    overflow-y: visible;
+    background: #ffffff;
+    color: #172033;
+}
+
+.landingPageContainer::before,
+.landingPageContainer::after {
+    pointer-events: none;
+}
+
+.landingSection {
+    scroll-margin-top: 125px;
+}
+
+/* Bordered, sticky navbar */
+.landingNavbar {
+    position: sticky;
+    top: 12px;
+    width: calc(100% - 64px);
+    max-width: 1460px;
+    min-height: 78px;
+    margin: 12px auto 0;
+    padding: 0 28px;
+    border: 1px solid #d7e0ee;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 8px 28px rgba(25, 50, 90, 0.08);
+    backdrop-filter: blur(14px);
+    z-index: 20;
+}
+
+.landingNavbar .navlist {
+    gap: clamp(18px, 2.2vw, 38px);
+}
+
+.landingNavbar .navlist a {
+    font-size: 14px;
+    font-weight: 650;
+    color: #344158;
+}
+
+.landingNavbar .navlist a:hover {
+    color: #1769ff;
+}
+
+.landingNavbar .navlist a.active::after {
+    height: 2px;
+}
+
+.brandLogo {
+    font-size: 25px;
+}
+
+.brandIcon {
+    font-size: 29px;
+}
+
+.navActions {
+    gap: 10px;
+}
+
+.loginBtn,
+.signupBtn {
+    min-width: auto;
+    padding: 11px 18px;
+    border-radius: 11px;
+    font-size: 13px;
+}
+
+.welcomeUser,
+.sessionChecking {
+    color: #344158;
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+.landingMenuToggle {
+    display: none;
+}
+
+/* Hero refinements */
+.landingMainContainer {
+    min-height: 660px;
+    padding-top: 48px;
+    padding-bottom: 38px;
+}
+
+.heroBadge {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+
+.heroDescription {
+    font-size: 17px;
+}
+
+.heroTrustLine {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 24px;
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.heroTrustDot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12);
+}
+
+.landingPreviewTopbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 12px;
+    color: #dce5f4;
+    font-size: 10px;
+}
+
+.landingPreviewTopbar span:first-child {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.landingPreviewTopbar i {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #35d08a;
+}
+
+/* Shared section headings */
+.sectionHeading {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto 42px;
+    text-align: center;
+}
+
+.sectionEyebrow {
+    display: inline-block;
+    margin-bottom: 13px;
+    color: #1769ff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+}
+
+.sectionHeading h2,
+.aboutContent h2,
+.contactCtaContent h2 {
+    margin: 0;
+    color: #172033;
+    font-size: clamp(30px, 3.4vw, 46px);
+    line-height: 1.15;
+    letter-spacing: -1.7px;
+    font-weight: 800;
+}
+
+.sectionHeading h2 span,
+.aboutContent h2 span,
+.contactCtaContent h2 span {
+    color: #1769ff;
+}
+
+.sectionHeading > p {
+    margin: 15px auto 0;
+    max-width: 620px;
+    color: #69778e;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* Detailed features */
+.landingFeatures {
+    display: block;
+    max-width: none;
+    padding: 95px max(5.3%, calc((100% - 1320px) / 2)) 105px;
+    background: #f7faff;
+}
+
+.landingFeatures .sectionHeading {
+    margin-bottom: 44px;
+}
+
+.landingFeatureGrid {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.landingFeatureCard {
+    min-height: 220px;
+    padding: 27px 25px;
+    border: 1px solid #e5ebf4;
+    border-radius: 19px;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(30, 55, 95, 0.035);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.landingFeatureCard:hover {
+    transform: translateY(-5px);
+    border-color: #c9d9ff;
+    box-shadow: 0 16px 34px rgba(30, 75, 150, 0.09);
+}
+
+.landingFeatureIcon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    font-size: 25px;
+    font-weight: 750;
+}
+
+.featureIconBlue { background: #e8f0ff; color: #2868ec; }
+.featureIconGreen { background: #e2f8ef; color: #159765; }
+.featureIconPurple { background: #f0eaff; color: #7954d6; }
+.featureIconOrange { background: #fff1e3; color: #d77a21; }
+.featureIconPink { background: #ffebf1; color: #d94e83; }
+.featureIconTeal { background: #e1f7f7; color: #148b91; }
+
+.landingFeatureCard h3 {
+    margin: 0 0 10px;
+    color: #1c2940;
+    font-size: 17px;
+    font-weight: 750;
+}
+
+.landingFeatureCard p {
+    margin: 0;
+    color: #6d7b91;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+/* How it works */
+.landingHowSection {
+    padding: 105px 5.3%;
+    background: #ffffff;
+}
+
+.howStepsGrid {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 35px minmax(0, 1fr) 35px minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+}
+
+.howStepCard {
+    position: relative;
+    min-height: 255px;
+    padding: 30px 26px;
+    border: 1px solid #e5ebf4;
+    border-radius: 19px;
+    background: #fbfcff;
+}
+
+.howStepNumber {
+    position: absolute;
+    top: 22px;
+    right: 23px;
+    color: #d4def0;
+    font-size: 25px;
+    font-weight: 850;
+}
+
+.howStepIcon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    border-radius: 16px;
+    background: #eaf1ff;
+    color: #1769ff;
+    font-size: 29px;
+    font-weight: 650;
+}
+
+.howStepCard h3 {
+    margin: 0 0 10px;
+    color: #1c2940;
+    font-size: 18px;
+}
+
+.howStepCard p {
+    margin: 0;
+    color: #6d7b91;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.howStepConnector {
+    color: #9bb6ed;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* About */
+.landingAboutSection {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: clamp(45px, 7vw, 100px);
+    padding: 105px max(5.3%, calc((100% - 1250px) / 2));
+    background: #f7faff;
+}
+
+.aboutVisual {
+    position: relative;
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aboutVisual::before,
+.aboutVisual::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.aboutVisual::before {
+    width: 300px;
+    height: 300px;
+    background: #e1edff;
+    top: 28px;
+    left: 9%;
+}
+
+.aboutVisual::after {
+    width: 215px;
+    height: 215px;
+    background: #eee5ff;
+    bottom: 10px;
+    right: 7%;
+}
+
+.aboutVisualCard {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 430px);
+    min-height: 285px;
+    padding: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 22px 55px rgba(35, 65, 115, 0.13);
+}
+
+.aboutVisualBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 30px;
+    background: #edf4ff;
+    color: #3268d7;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.aboutVisualBadge span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22b978;
+}
+
+.aboutVisualHeadline {
+    margin-top: 28px;
+    color: #172033;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 820;
+    letter-spacing: -1px;
+}
+
+.aboutVisualHeadline span { color: #1769ff; }
+
+.aboutAvatarRow {
+    display: flex;
+    align-items: center;
+    margin-top: 26px;
+}
+
+.aboutAvatarRow span,
+.aboutAvatarRow b {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -7px;
+    border: 3px solid white;
+    border-radius: 50%;
+    background: #dce8ff;
+    color: #2458b7;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.aboutAvatarRow span:nth-child(2) { background: #f9e5d9; color: #a45b34; }
+.aboutAvatarRow span:nth-child(3) { background: #e8e0ff; color: #7251ba; }
+.aboutAvatarRow span:nth-child(4) { background: #dff5ec; color: #26845e; }
+.aboutAvatarRow b { background: #edf0f6; color: #64748b; }
+
+.aboutVisualCard > small {
+    display: block;
+    margin-top: 13px;
+    color: #7a879b;
+    font-size: 11px;
+}
+
+.aboutFloatingNote {
+    position: absolute;
+    right: -4px;
+    bottom: 35px;
+    z-index: 2;
+    padding: 14px 18px;
+    border: 1px solid #e9eef6;
+    border-radius: 13px;
+    background: white;
+    color: #344158;
+    box-shadow: 0 12px 30px rgba(35, 65, 115, 0.1);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.aboutContent h2 {
+    margin: 0 0 22px;
+}
+
+.aboutContent > p {
+    margin: 0 0 16px;
+    color: #68778e;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.aboutExploreBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 14px 20px;
+    border: 0;
+    border-radius: 11px;
+    background: #1769ff;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.aboutExploreBtn:hover { background: #0755df; transform: translateY(-2px); }
+
+/* Why ConnectSphere */
+.landingWhySection {
+    padding: 100px 5.3%;
+    background: #ffffff;
+}
+
+.whyPointsGrid {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 28px;
+}
+
+.whyPoint {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 21px;
+    border: 1px solid #e8edf5;
+    border-radius: 15px;
+    background: #ffffff;
+}
+
+.whyPoint > span {
+    width: 27px;
+    height: 27px;
+    flex: 0 0 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #e6f8ef;
+    color: #159765;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.whyPoint h3 {
+    margin: 1px 0 6px;
+    color: #263247;
+    font-size: 15px;
+}
+
+.whyPoint p {
+    margin: 0;
+    color: #738097;
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+/* Final CTA */
+.landingContactSection {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1320px;
+    min-height: 295px;
+    margin: 0 auto 95px;
+    padding: 55px 70px;
+    overflow: hidden;
+    border-radius: 28px;
+    background: linear-gradient(115deg, #1769ff, #5749dc 100%);
+    color: white;
+}
+
+.contactCtaContent {
+    position: relative;
+    z-index: 1;
+    max-width: 650px;
+}
+
+.contactCtaContent .sectionEyebrow { color: #dce7ff; }
+
+.contactCtaContent h2 { color: white; font-size: clamp(34px, 4vw, 49px); }
+.contactCtaContent h2 span { color: #d5e5ff; }
+
+.contactCtaContent p {
+    max-width: 550px;
+    margin: 15px 0 23px;
+    color: #e3ebff;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.contactCtaButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 21px;
+    border: 0;
+    border-radius: 11px;
+    background: white;
+    color: #225bd0;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.contactCtaButton:hover { transform: translateY(-2px); }
+
+.contactCtaOrb {
+    position: absolute;
+    right: 75px;
+    top: 50%;
+    width: 190px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    font-size: 75px;
+    box-shadow: 0 0 0 25px rgba(255, 255, 255, 0.045), 0 0 0 55px rgba(255, 255, 255, 0.03);
+}
+
+/* Footer */
+.landingFooter {
+    position: relative;
+    z-index: 1;
+    padding: 45px max(5.3%, calc((100% - 1320px) / 2)) 20px;
+    border-top: 1px solid #e7edf5;
+    background: #fbfcff;
+}
+
+.landingFooterTop {
+    display: grid;
+    grid-template-columns: 1.3fr 1.5fr auto;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 35px;
+}
+
+.landingFooterBrand .brandLogo { font-size: 22px; }
+.landingFooterBrand .brandIcon { font-size: 25px; }
+
+.landingFooterBrand p {
+    margin: 9px 0 0 4px;
+    color: #7b8799;
+    font-size: 11px;
+}
+
+.landingFooterLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px 24px;
+}
+
+.landingFooterLinks a,
+.landingFooterBottom a {
+    color: #58677e;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 650;
+}
+
+.landingFooterLinks a:hover,
+.landingFooterBottom a:hover { color: #1769ff; }
+
+.landingFooterAccount button {
+    padding: 10px 14px;
+    border: 1px solid #d4e0f5;
+    border-radius: 9px;
+    background: white;
+    color: #2865d9;
+    font-size: 11px;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.landingFooterBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding-top: 19px;
+    border-top: 1px solid #e7edf5;
+    color: #96a1b1;
+    font-size: 11px;
+}
+
+/* Tablet */
+@media screen and (max-width: 1100px) {
+    .landingNavbar { width: calc(100% - 36px); padding: 0 18px; }
+    .landingNavbar .navlist { gap: 16px; }
+    .landingNavbar .navlist a { font-size: 12px; }
+    .welcomeUser { display: none; }
+    .landingMainContainer { min-height: 590px; }
+    .landingFeatureGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .landingContactSection { margin-inline: 24px; }
+}
+
+/* Mobile navigation and sections */
+@media screen and (max-width: 768px) {
+    .landingNavbar {
+        top: 7px;
+        width: calc(100% - 24px);
+        min-height: 68px;
+        margin-top: 7px;
+        padding: 0 14px;
+        border-radius: 14px;
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .landingNavbar .brandLogo { font-size: 19px; gap: 6px; }
+    .landingNavbar .brandIcon { font-size: 23px; }
+
+    .landingMenuToggle {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 38px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        order: 3;
+        border: 1px solid #dce5f2;
+        border-radius: 9px;
+        background: #ffffff;
+        cursor: pointer;
+    }
+
+    .landingMenuToggle span {
+        width: 17px;
+        height: 2px;
+        border-radius: 2px;
+        background: #344158;
+    }
+
+    .landingNavbar .navlist {
+        position: absolute;
+        top: calc(100% + 9px);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 15px;
+        border: 1px solid #d7e0ee;
+        border-radius: 13px;
+        background: white;
+        box-shadow: 0 15px 30px rgba(25, 50, 90, 0.12);
+    }
+
+    .landingNavbar .navlist.navlistOpen { display: flex; }
+    .landingNavbar .navlist a { padding: 12px 5px; font-size: 14px; }
+    .landingNavbar .navlist a.active::after { display: none; }
+
+    .landingNavbar .navActions { margin-left: auto; gap: 6px; }
+    .landingNavbar .loginBtn,
+    .landingNavbar .signupBtn { padding: 9px 10px; font-size: 11px; border-radius: 9px; }
+    .landingNavbar .historyNavBtn { display: none; }
+
+    .landingMainContainer {
+        flex-direction: column;
+        min-height: auto;
+        padding: 65px 6% 30px;
+        gap: 8px;
+    }
+
+    .heroContent { width: 100%; max-width: 100%; }
+    .heroContent h1 { font-size: clamp(42px, 10vw, 62px); letter-spacing: -2px; }
+    .heroDescription { font-size: 15px; }
+    .heroTrustLine { align-items: flex-start; font-size: 10px; }
+    .heroVisual { min-height: 370px; width: 100%; margin-top: 5px; }
+
+    .landingFeatures,
+    .landingHowSection,
+    .landingWhySection { padding: 72px 6%; }
+
+    .landingFeatureGrid { grid-template-columns: 1fr; gap: 13px; }
+    .landingFeatureCard { min-height: auto; padding: 22px; }
+
+    .howStepsGrid { grid-template-columns: 1fr; gap: 10px; }
+    .howStepCard { min-height: auto; padding: 24px; }
+    .howStepConnector { transform: rotate(90deg); }
+
+    .landingAboutSection {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 75px 6%;
+    }
+
+    .aboutVisual { min-height: 330px; }
+    .aboutVisualCard { padding: 25px; }
+    .aboutFloatingNote { right: 0; bottom: 5px; }
+    .whyPointsGrid { grid-template-columns: 1fr; }
+
+    .landingContactSection {
+        min-height: auto;
+        margin: 0 12px 65px;
+        padding: 42px 25px;
+        border-radius: 20px;
+    }
+
+    .contactCtaOrb { right: -65px; width: 150px; height: 150px; opacity: 0.55; }
+    .contactCtaContent { max-width: 100%; }
+
+    .landingFooter { padding: 35px 6% 18px; }
+    .landingFooterTop { grid-template-columns: 1fr; gap: 23px; }
+    .landingFooterLinks { justify-content: flex-start; gap: 14px 20px; }
+    .landingFooterBottom { align-items: flex-start; flex-direction: column; }
+}
+
+@media screen and (max-width: 420px) {
+    .landingNavbar { width: calc(100% - 16px); padding: 0 9px; }
+    .landingNavbar .brandLogo { font-size: 16px; }
+    .landingNavbar .brandIcon { font-size: 20px; }
+    .landingNavbar .loginBtn,
+    .landingNavbar .signupBtn { padding: 8px 8px; font-size: 10px; }
+    .landingMenuToggle { width: 34px; height: 34px; flex-basis: 34px; }
+    .heroButtons { flex-direction: column; align-items: stretch; }
+    .startMeetingBtn,
+    .joinMeetingBtn { width: 100%; }
+    .heroVisual { min-height: 315px; }
+    .laptopScreen { padding: 9px; }
+    .videoTile { min-height: 82px; }
+    .personAvatar { width: 43px; height: 43px; font-size: 21px; }
+    .meetingControls { gap: 5px; }
+    .meetingControls span { width: 27px; height: 27px; font-size: 12px; }
+    .meetingControls .endCall { width: 32px; height: 32px; }
+    .floatingCard { display: none; }
+    .aboutVisual { min-height: 285px; }
+    .aboutVisual::before { width: 225px; height: 225px; }
+    .aboutVisual::after { width: 155px; height: 155px; }
+}
+
+
+/* =========================================================
+   CONNECTSPHERE BRAND SYSTEM + LANDING PAGE FINISHING FIXES
+========================================================= */
+.connectSphereBrand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    color: #172033;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+}
+.connectSphereBrand:hover { text-decoration: none; }
+.connectSphereBrandMark {
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 40px;
+    border-radius: 12px;
+    background: #5A65E0;
+    color: #ffffff;
+    box-shadow: 0 5px 12px rgba(90, 101, 224, 0.18);
+}
+.connectSphereBrandMark svg { display: block; font-size: 25px; }
+.connectSphereBrandName {
+    color: #172033;
+    font-size: 23px;
+    font-weight: 780;
+    letter-spacing: -1.05px;
+}
+.connectSphereBrandName span { color: #5A65E0; }
+.connectSphereBrand--small .connectSphereBrandMark {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
+    border-radius: 11px;
+}
+.connectSphereBrand--small .connectSphereBrandMark svg { font-size: 23px; }
+.connectSphereBrand--small .connectSphereBrandName { font-size: 21px; }
+.connectSphereBrand--large .connectSphereBrandMark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    border-radius: 13px;
+}
+.connectSphereBrand--large .connectSphereBrandMark svg { font-size: 27px; }
+.connectSphereBrand--large .connectSphereBrandName { font-size: 26px; }
+.connectSphereBrand--inverse .connectSphereBrandName { color: #ffffff; }
+.connectSphereBrand--inverse .connectSphereBrandName span { color: #d8e6ff; }
+
+/* Same base canvas as the signed-in dashboard (#f8faff). */
+.landingPageContainer {
+    min-height: 100vh;
+    background: #f8faff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Remove old absolute background artwork that extended the scroll area
+   below the actual footer, leaving a large blank region after it. */
+.landingPageContainer::before,
+.landingPageContainer::after {
+    content: none !important;
+    display: none !important;
+}
+
+.landingPageContainer > main {
+    flex: 1 0 auto;
+    background: #f8faff;
+}
+.landingMainContainer { background: #f8faff; }
+.landingFeatures,
+.landingHowSection,
+.landingAboutSection,
+.landingWhySection { background: #f8faff; }
+.landingFeatureCard,
+.howStepCard,
+.whyPoint { background: #ffffff; }
+
+/* Keep the CTA/footer connected without a large empty gap. */
+.landingContactSection { margin-bottom: 48px; }
+.landingFooter {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: auto;
+    padding-top: 34px;
+    padding-bottom: 20px;
+    background: #f8faff;
+    border-top: 1px solid #e5ebf4;
+}
+.landingFooterTop { padding-bottom: 24px; }
+.landingFooterBrand .connectSphereBrand { gap: 8px; }
+.homePage { background: #f8faff; }
+
+@media screen and (max-width: 768px) {
+    .connectSphereBrand { gap: 7px; }
+    .connectSphereBrandMark {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+        border-radius: 10px;
+    }
+    .connectSphereBrandMark svg { font-size: 22px; }
+    .connectSphereBrandName { font-size: 19px; letter-spacing: -0.75px; }
+    .connectSphereBrand--small .connectSphereBrandMark {
+        width: 35px;
+        height: 35px;
+        flex-basis: 35px;
+    }
+    .connectSphereBrand--small .connectSphereBrandName { font-size: 19px; }
+}
+
+
+/* =========================================================
+   LANDING PAGE BRAND PURPLE PALETTE + FOOTER POSITION
+   Scoped to LandingPage so other app screens keep their styling.
+========================================================= */
+.landingPageContainer {
+    --connectsphere-purple: #5A65E0;
+    --connectsphere-purple-hover: #4B55C8;
+    --connectsphere-purple-soft: #EEF0FF;
+    --connectsphere-purple-pale: #F5F5FF;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Logo uses the same VideoCallIcon tile as the Home navbar. */
+.landingPageContainer .connectSphereBrandMark {
+    background: #5A65E0;
+    box-shadow: 0 5px 12px rgba(90, 101, 224, 0.18);
+}
+.landingPageContainer .connectSphereBrandName span {
+    color: #5A65E0;
+}
+
+/* Navbar accents and account buttons. */
+.landingPageContainer .landingNavbar .navlist a:hover,
+.landingPageContainer .landingNavbar .navlist a.active {
+    color: #5A65E0;
+}
+.landingPageContainer .landingNavbar .navlist a.active::after {
+    background: #5A65E0;
+}
+.landingPageContainer .landingNavbar .loginBtn {
+    color: #5A65E0;
+    border-color: #5A65E0;
+}
+.landingPageContainer .landingNavbar .loginBtn:hover {
+    background: #F0F1FF;
+}
+.landingPageContainer .landingNavbar .signupBtn {
+    background: #5A65E0;
+    border-color: #5A65E0;
+    box-shadow: 0 5px 15px rgba(90, 101, 224, 0.18);
+}
+.landingPageContainer .landingNavbar .signupBtn:hover {
+    background: #4B55C8;
+}
+
+/* Hero headline, badge, and meeting actions. */
+.landingPageContainer .heroBadge {
+    background: #EEF0FF;
+    color: #5A65E0;
+}
+.landingPageContainer .heroContent h1 span {
+    color: #5A65E0;
+}
+.landingPageContainer .startMeetingBtn {
+    background: #5A65E0;
+    border-color: #5A65E0;
+    box-shadow: 0 8px 18px rgba(90, 101, 224, 0.18);
+}
+.landingPageContainer .startMeetingBtn:hover {
+    background: #4B55C8;
+}
+.landingPageContainer .joinMeetingBtn {
+    border-color: #5A65E0;
+    color: #5A65E0;
+}
+.landingPageContainer .joinMeetingBtn:hover {
+    background: #F0F1FF;
+}
+
+/* Keep decorative blue elements in the same lavender family. */
+.landingPageContainer .visualCircleBlue {
+    background: linear-gradient(135deg, #DADFFF, #EEEFFF);
+}
+.landingPageContainer .visualCirclePurple {
+    background: linear-gradient(135deg, #C9CDFF, #E8DFFF);
+}
+.landingPageContainer .personAvatar {
+    background: rgba(90, 101, 224, 0.78);
+}
+.landingPageContainer .floatingIcon {
+    background: #EEF0FF;
+}
+.landingPageContainer .easyIcon {
+    background: #EEEFFF;
+}
+
+/* Feature and How It Works accents. */
+.landingPageContainer .sectionEyebrow {
+    color: #5A65E0;
+}
+.landingPageContainer .sectionHeading h2 span,
+.landingPageContainer .aboutContent h2 span,
+.landingPageContainer .contactCtaContent h2 span {
+    color: #5A65E0;
+}
+.landingPageContainer .featureIconBlue {
+    background: #EEF0FF;
+    color: #5A65E0;
+}
+.landingPageContainer .howStepIcon {
+    background: #EEF0FF;
+    color: #5A65E0;
+}
+.landingPageContainer .howStepConnector {
+    color: #9AA2F0;
+}
+.landingPageContainer .howStepNumber {
+    color: #D9DCF8;
+}
+.landingPageContainer .landingFeatureCard:hover {
+    border-color: #DADDF8;
+    box-shadow: 0 16px 34px rgba(90, 101, 224, 0.09);
+}
+
+/* About section accents. */
+.landingPageContainer .aboutVisual::before {
+    background: #E8EAFF;
+}
+.landingPageContainer .aboutVisualBadge {
+    background: #EEF0FF;
+    color: #5A65E0;
+}
+.landingPageContainer .aboutVisualHeadline span {
+    color: #5A65E0;
+}
+.landingPageContainer .aboutAvatarRow span:first-child {
+    background: #E2E5FF;
+    color: #4B55C8;
+}
+.landingPageContainer .aboutExploreBtn {
+    background: #5A65E0;
+}
+.landingPageContainer .aboutExploreBtn:hover {
+    background: #4B55C8;
+}
+
+/* CTA uses a purple gradient instead of the old blue gradient. */
+.landingPageContainer .landingContactSection {
+    background: linear-gradient(115deg, #5A65E0 0%, #4E46C4 100%);
+}
+.landingPageContainer .contactCtaContent .sectionEyebrow {
+    color: #E4E5FF;
+}
+.landingPageContainer .contactCtaContent h2 span {
+    color: #E4E5FF;
+}
+.landingPageContainer .contactCtaContent p {
+    color: #F0F0FF;
+}
+.landingPageContainer .contactCtaButton {
+    color: #5A65E0;
+}
+
+/* Footer remains at the bottom of the page, after all page content. */
+.landingPageContainer > main {
+    flex: 1 0 auto;
+}
+.landingPageContainer .landingFooter {
+    width: 100%;
+    flex: 0 0 auto;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+    background: #F8FAFF;
+}
+.landingPageContainer .landingFooterLinks a:hover,
+.landingPageContainer .landingFooterBottom a:hover {
+    color: #5A65E0;
+}
+.landingPageContainer .landingFooterAccount button {
+    border-color: #DADDF8;
+    color: #5A65E0;
+}
+.landingPageContainer .landingFooterAccount button:hover {
+    background: #F0F1FF;
+}
+
+@media screen and (max-width: 768px) {
+    .landingPageContainer .connectSphereBrandMark {
+        background: #5A65E0;
+    }
+    .landingPageContainer .landingFooter {
+        margin-top: auto;
+    }
+}
+
+/* =========================================================
+   REFINED LANDING FOOTER — NO REPEATED NAVBAR MENU
+========================================================= */
+.landingPageContainer .landingFooter {
+    padding: 48px max(5.3%, calc((100% - 1320px) / 2)) 20px;
+    background: #f8faff;
+    border-top: 1px solid #e4e9f5;
+}
+
+.landingPageContainer .landingFooterTop {
+    display: grid;
+    grid-template-columns: minmax(250px, 1.7fr) repeat(3, minmax(130px, 0.8fr));
+    align-items: start;
+    gap: clamp(24px, 4vw, 58px);
+    padding-bottom: 36px;
+}
+
+.landingPageContainer .landingFooterBrand {
+    max-width: 310px;
+}
+
+.landingPageContainer .landingFooterBrand .connectSphereBrand {
+    gap: 9px;
+}
+
+.landingPageContainer .landingFooterTagline {
+    margin: 13px 0 5px;
+    color: #344158;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.1px;
+}
+
+.landingPageContainer .landingFooterDescription {
+    max-width: 260px;
+    margin: 0;
+    color: #7b879d;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.landingPageContainer .landingFooterColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+    padding-top: 8px;
+}
+
+.landingPageContainer .landingFooterColumn h3 {
+    margin: 0 0 4px;
+    color: #192032;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.15px;
+}
+
+.landingPageContainer .landingFooterColumn a,
+.landingPageContainer .landingFooterColumn button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #64718a;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 550;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.landingPageContainer .landingFooterColumn a:hover,
+.landingPageContainer .landingFooterColumn button:hover {
+    color: #5A65E0;
+    transform: translateX(2px);
+}
+
+.landingPageContainer .landingFooterBottom {
+    padding-top: 18px;
+    border-top: 1px solid #e4e9f5;
+    color: #8a95a8;
+    font-size: 11px;
+}
+
+.landingPageContainer .landingFooterBottom a {
+    color: #5c6880;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+/* In-page policy dialogs: working links without adding broken routes. */
+.footerDialogOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: rgba(15, 23, 42, 0.56);
+    backdrop-filter: blur(7px);
+}
+
+.footerDialog {
+    position: relative;
+    width: min(100%, 620px);
+    max-height: min(82vh, 760px);
+    overflow-y: auto;
+    padding: 34px 38px 36px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 22px;
+    background: #ffffff;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.24);
+}
+
+.footerDialogClose {
+    position: absolute;
+    top: 15px;
+    right: 17px;
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 50%;
+    background: #f1f2ff;
+    color: #5A65E0;
+    font-size: 23px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.footerDialogEyebrow {
+    color: #5A65E0;
+    font-size: 10px;
+    font-weight: 850;
+    letter-spacing: 1.3px;
+}
+
+.footerDialog h2 {
+    margin: 9px 40px 14px 0;
+    color: #192032;
+    font-size: clamp(24px, 4vw, 30px);
+    letter-spacing: -0.8px;
+}
+
+.footerDialog h3 {
+    margin: 22px 0 7px;
+    color: #26324a;
+    font-size: 14px;
+}
+
+.footerDialog p {
+    margin: 0 0 12px;
+    color: #657188;
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+@media screen and (max-width: 900px) {
+    .landingPageContainer .landingFooterTop {
+        grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(110px, 0.8fr));
+        gap: 24px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .landingPageContainer .landingFooter {
+        padding: 36px 6% 18px;
+    }
+
+    .landingPageContainer .landingFooterTop {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 22px;
+    }
+
+    .landingPageContainer .landingFooterBrand {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    .landingPageContainer .landingFooterDescription {
+        max-width: 340px;
+    }
+
+    .footerDialog {
+        padding: 30px 23px 28px;
+        border-radius: 18px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .landingPageContainer .landingFooterTop {
+        grid-template-columns: 1fr;
+    }
+}

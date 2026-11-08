@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>ConnectSphere</title>
+  <rect x="0" y="0" width="100" height="100" rx="21" fill="#5A65E0"/>
+
+  <!-- White camera body -->
+  <rect x="25" y="35" width="36" height="30" rx="3.5" fill="#FFFFFF"/>
+
+  <!-- Camera lens: tapered white projection on the right -->
+  <path d="M61 44 L76 34 L76 66 L61 56 Z" fill="#FFFFFF"/>
+
+  <!-- Indigo plus cutout in the camera body -->
+  <path
+    d="M43 44 V56 M37 50 H49"
+    fill="none"
+    stroke="#5A65E0"
+    stroke-width="6"
+    stroke-linecap="square"
+  />
+</svg>

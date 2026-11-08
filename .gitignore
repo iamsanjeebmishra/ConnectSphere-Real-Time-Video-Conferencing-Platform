@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Build files
+frontend/build/
+frontend/dist/
+
+# Logs
+*.log
+# macOS files
+**/.DS_Store

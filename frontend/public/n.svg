@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="ConnectSphere">
+  <rect width="100" height="100" rx="23" fill="#5A65E0"/>
+  <rect x="26" y="36" width="44" height="30" rx="3" fill="#FFFFFF"/>
+  <path d="M70 44 L87 31 V71 L70 58 Z" fill="#FFFFFF"/>
+  <path d="M48 42 V60 M39 51 H57" fill="none" stroke="#5A65E0" stroke-width="7" stroke-linecap="square"/>
+</svg>

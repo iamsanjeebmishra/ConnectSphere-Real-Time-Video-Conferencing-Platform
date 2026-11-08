@@ -1,0 +1,1722 @@
+
+/* =========================================
+   GLOBAL VIDEO MEETING PAGE
+========================================= */
+
+.videoMeetPage {
+    min-height: 100vh;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* =========================================
+   PRE-JOIN PAGE
+========================================= */
+
+.preJoinPage {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #f8faff;
+    color: #172554;
+}
+
+/* Navbar */
+
+.preJoinNavbar {
+    height: 78px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #edf0f6;
+    box-sizing: border-box;
+}
+
+.preJoinBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.preJoinBrandIcon {
+    width: 39px;
+    height: 39px;
+    flex: 0 0 39px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5A65E0;
+    border-radius: 12px;
+}
+
+.brandCameraMark {
+    display: block;
+    width: 27px;
+    height: 21px;
+}
+
+.preJoinBrand h2 {
+    margin: 0;
+    font-size: 23px;
+    line-height: 1;
+    font-weight: 750;
+    color: #192032;
+    letter-spacing: -1px;
+}
+
+.preJoinBrand h2 span {
+    color: #5A65E0;
+}
+
+.secureLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.secureLabel svg {
+    font-size: 19px;
+    color: #4263eb;
+}
+
+/* Main content */
+
+.preJoinContent {
+    flex: 1;
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 65px 35px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 75px;
+}
+
+/* Camera preview */
+
+.preJoinLeft {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cameraPreview {
+    position: relative;
+    width: 100%;
+    max-width: 610px;
+    height: 365px;
+    overflow: hidden;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #172554, #312e81);
+    box-shadow: 0 22px 55px rgba(30, 41, 95, 0.17);
+}
+
+.cameraPreview video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1);
+}
+
+.cameraOffOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #172554, #312e81);
+    color: white;
+    gap: 14px;
+}
+
+.cameraOffOverlay p {
+    margin: 0;
+    font-size: 15px;
+    color: #dbeafe;
+}
+
+.cameraOffAvatar {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 35px;
+    font-weight: 600;
+}
+
+.previewLabel {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border-radius: 30px;
+    background: rgba(15, 23, 42, 0.65);
+    color: white;
+    font-size: 12px;
+    backdrop-filter: blur(8px);
+}
+
+.liveDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.previewName {
+    position: absolute;
+    bottom: 17px;
+    left: 18px;
+    padding: 8px 13px;
+    border-radius: 8px;
+    background: rgba(15, 23, 42, 0.65);
+    color: white;
+    font-size: 13px;
+    backdrop-filter: blur(8px);
+}
+
+/* Camera and microphone controls */
+
+.preJoinControls {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.deviceButton {
+    min-width: 125px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    border: 1px solid #dbe3f0;
+    border-radius: 12px;
+    background: white;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.deviceButton:hover {
+    border-color: #4263eb;
+    background: #f1f5ff;
+}
+
+.deviceButton svg {
+    font-size: 20px;
+    color: #4263eb;
+}
+
+.deviceOff {
+    background: #fff1f2;
+    border-color: #fecdd3;
+    color: #be123c;
+}
+
+.deviceOff svg {
+    color: #e11d48;
+}
+
+.deviceButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Right content */
+
+.preJoinRight {
+    width: 100%;
+    max-width: 450px;
+}
+
+.preJoinBadge {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 14px;
+    border-radius: 30px;
+    background: #eaf0ff;
+    color: #4263eb;
+    font-size: 12px;
+    font-weight: 650;
+    margin-bottom: 23px;
+}
+
+.preJoinBadge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+.preJoinRight h1 {
+    margin: 0;
+    color: #172554;
+    font-size: 49px;
+    line-height: 1.15;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.preJoinDescription {
+    max-width: 420px;
+    margin: 20px 0 30px;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* Username field */
+
+.usernameField {
+    width: 100%;
+    margin-bottom: 22px;
+}
+
+.usernameField label {
+    display: block;
+    margin-bottom: 10px;
+    color: #334155;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.usernameField :global(.MuiOutlinedInput-root) {
+    border-radius: 12px;
+    background: white;
+}
+
+.usernameField :global(.MuiOutlinedInput-root.Mui-focused fieldset) {
+    border-color: #4263eb;
+}
+
+.usernameField :global(.MuiInputBase-input) {
+    padding: 15px;
+    font-size: 14px;
+}
+
+/* Join button */
+
+.joinNowButton {
+    min-height: 53px !important;
+    border-radius: 12px !important;
+    background: linear-gradient(110deg, #4263eb, #7048e8) !important;
+    color: white !important;
+    font-size: 15px !important;
+    font-weight: 650 !important;
+    text-transform: none !important;
+    box-shadow: 0 8px 20px rgba(66, 99, 235, 0.22) !important;
+    transition: all 0.2s ease !important;
+}
+
+.joinNowButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(66, 99, 235, 0.3) !important;
+}
+
+.joinNowButton:disabled {
+    opacity: 0.55;
+    transform: none;
+}
+
+/* Privacy note */
+
+.preJoinNote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.preJoinNote svg {
+    font-size: 16px;
+    color: #64748b;
+}
+
+/* Footer */
+
+.preJoinFooter {
+    min-height: 65px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #e8edf5;
+    background: white;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   ACTIVE MEETING ROOM
+========================================= */
+
+.meetVideoContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #101827;
+    color: #ffffff;
+}
+
+/* Meeting header */
+
+.meetingHeader {
+    flex-shrink: 0;
+    height: 68px;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #172033;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.meetingHeaderBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 19px;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+}
+
+.meetingHeaderBrand > span:last-child {
+    color: #FFFFFF;
+}
+
+.meetingHeaderBrand > span:last-child > span {
+    color: #5A65E0;
+}
+
+.meetingBrandIcon {
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #5A65E0;
+    border-radius: 10px;
+}
+
+.meetingBrandCameraMark {
+    display: block;
+    width: 24px;
+    height: 18px;
+}
+
+.meetingHeaderInfo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.meetingLiveDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.meetingParticipantCount {
+    padding: 8px 13px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2e8f0;
+    font-size: 12px;
+}
+
+/* Main meeting layout */
+
+.meetingMain {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 18px;
+    padding: 22px 25px;
+    overflow: hidden;
+    box-sizing: border-box;
+    transition: all 0.25s ease;
+}
+
+.meetingMainWithChat {
+    gap: 20px;
+}
+
+/* Video stage */
+
+.meetingStage {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Participant grid */
+
+.conferenceView {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 300px), 1fr)
+    );
+    grid-auto-rows: minmax(200px, 1fr);
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    overflow-y: auto;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+/* Individual participant tile */
+
+.videoTile {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    max-height: 520px;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #202d43;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.videoTile video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background: #202d43;
+}
+
+/* Mirror only the local camera preview, like Google Meet. */
+.localParticipantVideo {
+    transform: scaleX(-1) !important;
+    -webkit-transform: scaleX(-1) !important;
+}
+
+/* Remote participant video stays in its natural, unmirrored orientation. */
+.remoteParticipantVideo {
+    transform: none !important;
+    -webkit-transform: none !important;
+}
+
+/* Participant name */
+
+.participantName {
+    position: absolute;
+    left: 13px;
+    bottom: 13px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(10, 17, 31, 0.72);
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+}
+
+.participantStatusDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+}
+
+/* Camera disabled participant */
+
+.participantCameraOff {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #24334d, #172554);
+}
+
+.participantAvatar {
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #536bba;
+    color: white;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.participantMuted {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    z-index: 3;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(220, 38, 38, 0.9);
+    color: white;
+}
+
+.participantMuted svg {
+    font-size: 18px;
+}
+
+/* Empty meeting state */
+
+.waitingForParticipants {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 350px;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    pointer-events: none;
+}
+
+.waitingIcon {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(99, 102, 241, 0.15);
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.waitingForParticipants h3 {
+    margin: 0 0 9px;
+    color: #f1f5f9;
+    font-size: 19px;
+}
+
+.waitingForParticipants p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   MEETING CHAT SIDEBAR
+========================================= */
+
+.chatRoom {
+    flex-shrink: 0;
+    width: 340px;
+    height: 100%;
+    display: flex;
+    padding: 18px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: #ffffff;
+    color: #172554;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.chatContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat header */
+
+.chatHeader {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.chatHeader h1 {
+    margin: 0;
+    color: #172554;
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.chatHeader p {
+    margin: 5px 0 0;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.chatHeader :global(.MuiIconButton-root) {
+    color: #64748b;
+}
+
+/* Messages */
+
+.chattingDisplay {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 4px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chatMessage {
+    position: relative;
+    max-width: 94%;
+    margin: 0 0 16px;
+    padding: 13px 15px;
+    border-radius: 15px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    overflow-wrap: anywhere;
+}
+
+.chatMessage:hover {
+    transform: translateY(-1px);
+}
+
+/* Host messages: ConnectSphere indigo-violet gradient. */
+.hostChatMessage {
+    align-self: flex-start;
+    color: #ffffff;
+    background: linear-gradient(135deg, #5965e0 0%, #7567e9 58%, #8268e8 100%);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-left: 4px solid #a9aaff;
+    border-radius: 15px 15px 15px 5px;
+    box-shadow: 0 7px 18px rgba(90, 101, 224, 0.22);
+}
+
+/* Guest messages: soft blue-lavender surface with a clear cool border. */
+.guestChatMessage {
+    align-self: flex-end;
+    color: #26324a;
+    background: linear-gradient(135deg, #fbfcff 0%, #edf0ff 100%);
+    border: 1px solid #d8ddff;
+    border-right: 4px solid #98a3f3;
+    border-radius: 15px 15px 5px 15px;
+    box-shadow: 0 6px 16px rgba(42, 56, 110, 0.09);
+}
+
+.hostChatMessage .chatSender {
+    color: #ffffff;
+}
+
+.guestChatMessage .chatSender {
+    color: #4655b5;
+}
+
+.chatSender {
+    margin: 0 0 6px;
+    font-size: 12px;
+    font-weight: 750;
+    letter-spacing: 0.1px;
+}
+
+.chatSenderRole {
+    font-size: 10px;
+    font-weight: 650;
+    opacity: 0.78;
+}
+
+.chatMessageText {
+    margin: 0;
+    color: inherit;
+    font-size: 13px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+/* Empty chat */
+
+.emptyChat {
+    height: 100%;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #94a3b8;
+}
+
+.emptyChat svg {
+    margin-bottom: 12px;
+    font-size: 30px;
+    color: #8298ff;
+}
+
+.emptyChat p {
+    margin: 0 0 6px;
+    color: #334155;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.emptyChat span {
+    font-size: 11px;
+}
+
+/* Chat input */
+
+.chattingArea {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 13px;
+    border-top: 1px solid #e2e8f0;
+    background: white;
+}
+
+.chattingArea :global(.MuiTextField-root) {
+    flex: 1;
+    min-width: 0;
+}
+
+.chattingArea :global(.MuiOutlinedInput-root) {
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.chattingArea :global(.MuiButton-root) {
+    min-width: 62px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #4263eb;
+    text-transform: none;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   BOTTOM MEETING CONTROLS
+========================================= */
+
+.meetingControls {
+    flex-shrink: 0;
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #172033;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.meetingControlGroup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.controlWithLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: #cbd5e1;
+    font-size: 10px;
+}
+
+.meetingControlButton {
+    width: 48px;
+    height: 48px;
+    color: white !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.2s ease !important;
+}
+
+.meetingControlButton:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.meetingControlButton svg {
+    font-size: 22px;
+}
+
+.controlDisabled {
+    background: rgba(220, 38, 38, 0.2) !important;
+    color: #fca5a5 !important;
+}
+
+.controlActive {
+    background: rgba(99, 102, 241, 0.35) !important;
+    color: #a5b4fc !important;
+}
+
+.endCallButton {
+    width: 58px;
+    height: 48px;
+    border-radius: 15px !important;
+    color: white !important;
+    background: #dc2626 !important;
+    transition: all 0.2s ease !important;
+}
+
+.endCallButton:hover {
+    background: #b91c1c !important;
+    transform: scale(1.05);
+}
+
+.endCallButton svg {
+    font-size: 24px;
+}
+
+
+/* =========================================
+   SCROLLBARS
+========================================= */
+
+.conferenceView::-webkit-scrollbar,
+.chattingDisplay::-webkit-scrollbar {
+    width: 6px;
+}
+
+.conferenceView::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.chattingDisplay::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .preJoinContent {
+        gap: 40px;
+        padding: 55px 30px;
+    }
+
+    .cameraPreview {
+        height: 310px;
+    }
+
+    .preJoinRight h1 {
+        font-size: 42px;
+    }
+
+    .chatRoom {
+        width: 310px;
+    }
+
+    .meetingMain {
+        padding: 16px;
+    }
+
+    .conferenceView {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, 270px), 1fr)
+        );
+        gap: 12px;
+    }
+
+    .meetingControlGroup {
+        gap: 20px;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    /* Pre-join */
+
+    .preJoinNavbar {
+        height: 68px;
+        padding: 0 5%;
+    }
+
+    .preJoinBrand h2 {
+        font-size: 19px;
+    }
+
+    .preJoinBrandIcon {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .brandCameraMark {
+        width: 25px;
+        height: 19px;
+    }
+
+    .preJoinContent {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 35px 22px 45px;
+    }
+
+    .preJoinLeft {
+        order: 1;
+    }
+
+    .preJoinRight {
+        order: 2;
+        max-width: 610px;
+        margin: 0 auto;
+    }
+
+    .cameraPreview {
+        height: 340px;
+    }
+
+    .preJoinRight h1 {
+        font-size: 40px;
+    }
+
+    .preJoinFooter {
+        padding: 15px 5%;
+    }
+
+    /* Meeting */
+
+    .meetingHeader {
+        height: 58px;
+        padding: 0 15px;
+    }
+
+    .meetingHeaderBrand {
+        font-size: 16px;
+    }
+
+    .meetingHeaderInfo {
+        font-size: 11px;
+    }
+
+    .meetingParticipantCount {
+        font-size: 10px;
+        padding: 7px 9px;
+    }
+
+    .meetingMain {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .chatRoom {
+        width: 290px;
+        padding: 14px;
+    }
+
+    .conferenceView {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, 230px), 1fr)
+        );
+        gap: 10px;
+    }
+
+    .videoTile {
+        min-height: 170px;
+    }
+
+    .meetingControls {
+        height: 85px;
+    }
+
+    .meetingControlGroup {
+        gap: 16px;
+    }
+
+    .meetingControlButton {
+        width: 44px;
+        height: 44px;
+    }
+
+    .endCallButton {
+        width: 52px;
+        height: 44px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    /* Pre-join */
+
+    .secureLabel {
+        font-size: 11px;
+    }
+
+    .secureLabel svg {
+        font-size: 16px;
+    }
+
+    .preJoinContent {
+        padding: 25px 16px 35px;
+        gap: 32px;
+    }
+
+    .cameraPreview {
+        height: 245px;
+        border-radius: 16px;
+    }
+
+    .preJoinRight h1 {
+        font-size: 34px;
+        letter-spacing: -1px;
+    }
+
+    .preJoinDescription {
+        font-size: 14px;
+    }
+
+    .preJoinControls {
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .deviceButton {
+        min-width: 115px;
+        padding: 11px 12px;
+        font-size: 12px;
+    }
+
+    .preJoinFooter {
+        flex-direction: column;
+        justify-content: center;
+        gap: 7px;
+        font-size: 11px;
+    }
+
+    /* Meeting */
+
+    .meetVideoContainer {
+        min-height: 500px;
+    }
+
+    .meetingHeader {
+        height: 54px;
+        padding: 0 10px;
+    }
+
+    .meetingHeaderBrand {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    .meetingBrandIcon {
+        width: 29px;
+        height: 29px;
+        font-size: 16px;
+    }
+
+    .meetingHeaderInfo {
+        display: none;
+    }
+
+    .meetingParticipantCount {
+        padding: 6px 8px;
+    }
+
+    .meetingMain {
+        padding: 8px;
+        gap: 0;
+    }
+
+    .meetingMainWithChat {
+        flex-direction: column;
+    }
+
+    .meetingStage {
+        min-height: 150px;
+    }
+
+    .conferenceView {
+        grid-template-columns: 1fr;
+        grid-auto-rows: minmax(170px, 1fr);
+        gap: 10px;
+        padding: 3px;
+    }
+
+    .videoTile {
+        min-height: 170px;
+        max-height: none;
+        border-radius: 12px;
+    }
+
+    .participantName {
+        left: 9px;
+        bottom: 9px;
+        padding: 6px 9px;
+        font-size: 10px;
+    }
+
+    .participantAvatar {
+        width: 65px;
+        height: 65px;
+        font-size: 27px;
+    }
+
+    .chatRoom {
+        width: 100%;
+        height: 48%;
+        min-height: 220px;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .meetingMainWithChat .meetingStage {
+        flex: 1;
+    }
+
+    .meetingControls {
+        height: 78px;
+    }
+
+    .meetingControlGroup {
+        width: 100%;
+        gap: 0;
+        justify-content: space-evenly;
+    }
+
+    .controlWithLabel {
+        gap: 4px;
+        font-size: 9px;
+    }
+
+    .meetingControlButton {
+        width: 40px;
+        height: 40px;
+    }
+
+    .meetingControlButton svg {
+        font-size: 19px;
+    }
+
+    .endCallButton {
+        width: 45px;
+        height: 40px;
+    }
+
+    .endCallButton svg {
+        font-size: 21px;
+    }
+
+}
+
+/* =========================================
+   HOST SELF-VIEW CORNER THUMBNAIL
+========================================= */
+
+/*
+   The host's local video is removed from the participant grid
+   and displayed as a compact picture-in-picture tile.
+   Guest local previews keep the regular participant tile layout.
+*/
+
+.hostSelfView {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    z-index: 6;
+    width: clamp(180px, 22vw, 280px);
+    height: clamp(120px, 18vh, 175px);
+    min-height: 0;
+    max-height: none;
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    border-radius: 14px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.42);
+    background: #202d43;
+}
+
+.hostSelfView video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hostSelfView .participantName {
+    left: 8px;
+    bottom: 8px;
+    gap: 5px;
+    padding: 6px 9px;
+    font-size: 11px;
+}
+
+.hostSelfView .participantAvatar {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+}
+
+
+/* =========================================
+   POST-LEAVE / REJOIN SCREEN
+========================================= */
+
+.rejoinPage {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    box-sizing: border-box;
+    background:
+        radial-gradient(circle at 15% 15%, rgba(66, 99, 235, 0.12), transparent 32%),
+        radial-gradient(circle at 85% 85%, rgba(112, 72, 232, 0.12), transparent 30%),
+        #f7f9ff;
+    color: #172554;
+}
+
+.rejoinCard {
+    width: 100%;
+    max-width: 480px;
+    padding: 48px 42px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #e5eaf5;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 24px 65px rgba(30, 41, 95, 0.12);
+}
+
+.rejoinIcon {
+    width: 76px;
+    height: 76px;
+    margin-bottom: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.rejoinIcon svg {
+    font-size: 37px;
+}
+
+.rejoinEyebrow {
+    margin-bottom: 13px;
+    color: #4263eb;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.5px;
+}
+
+.rejoinCard h1 {
+    margin: 0;
+    color: #172554;
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.rejoinCard > p {
+    max-width: 370px;
+    margin: 17px 0 26px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.rejoinError {
+    width: 100%;
+    margin: 0 0 18px !important;
+    padding: 11px 13px;
+    box-sizing: border-box;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fff1f2;
+    color: #be123c !important;
+    font-size: 13px !important;
+}
+
+.rejoinActions {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rejoinActions :global(.MuiButton-root) {
+    min-height: 50px;
+    border-radius: 11px;
+    font-size: 14px;
+    font-weight: 650;
+    text-transform: none;
+}
+
+.rejoinActions :global(.MuiButton-contained) {
+    background: linear-gradient(110deg, #4263eb, #7048e8);
+    box-shadow: 0 8px 20px rgba(66, 99, 235, 0.2);
+}
+
+.rejoinActions :global(.MuiButton-contained:hover) {
+    background: linear-gradient(110deg, #3454d1, #613bd4);
+}
+
+.rejoinActions :global(.MuiButton-outlined) {
+    border-color: #dbe3f0;
+    color: #475569;
+}
+
+.rejoinActions :global(.MuiButton-outlined:hover) {
+    border-color: #4263eb;
+    background: #f4f6ff;
+}
+
+
+/* =========================================
+   RECONNECTING STATE
+========================================= */
+
+.meetingHeaderInfo {
+    transition: color 0.2s ease;
+}
+
+@media (max-width: 768px) {
+    .hostSelfView {
+        right: 12px;
+        bottom: 12px;
+        width: 165px;
+        height: 112px;
+        min-height: 0;
+        border-radius: 11px;
+    }
+
+    .hostSelfView .participantName {
+        left: 6px;
+        bottom: 6px;
+        padding: 5px 7px;
+        font-size: 9px;
+    }
+
+    .hostSelfView .participantMuted {
+        top: 7px;
+        right: 7px;
+        width: 27px;
+        height: 27px;
+    }
+
+    .hostSelfView .participantMuted svg {
+        font-size: 15px;
+    }
+
+    .rejoinCard {
+        padding: 38px 27px;
+    }
+
+    .rejoinCard h1 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 500px) {
+    .hostSelfView {
+        right: 8px;
+        bottom: 8px;
+        width: 132px;
+        height: 92px;
+        min-height: 0;
+    }
+
+    .rejoinPage {
+        padding: 18px;
+    }
+
+    .rejoinCard {
+        padding: 32px 22px;
+        border-radius: 19px;
+    }
+
+    .rejoinIcon {
+        width: 65px;
+        height: 65px;
+        margin-bottom: 19px;
+    }
+
+    .rejoinIcon svg {
+        font-size: 31px;
+    }
+
+    .rejoinCard h1 {
+        font-size: 25px;
+    }
+
+    .rejoinCard > p {
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   PARTICIPANT GRID / CLICK-TO-FOCUS VIEW
+========================================= */
+
+/* Focus mode uses almost all of the meeting stage for the selected video.
+   Remaining participants are arranged in a vertical rail on the right. */
+.participantFocusView {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "featured"
+        "actions";
+    gap: 12px;
+    overflow: hidden;
+}
+
+/* In a two-person meeting the rail is absent, so the featured video spans
+   the full stage and leaves only a compact action row underneath. */
+.participantFocusViewWithRail {
+    grid-template-columns: minmax(0, 1fr) clamp(190px, 20vw, 290px);
+    grid-template-rows: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "featured rail"
+        "actions rail";
+}
+
+.featuredParticipantArea {
+    grid-area: featured;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.featuredParticipantTile {
+    flex: 1 1 auto;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    max-height: none;
+    border-radius: 16px;
+}
+
+.participantThumbnailStrip {
+    grid-area: rail;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 2px 3px 2px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.participantThumbnailTile {
+    flex: 0 0 clamp(105px, 17vh, 165px);
+    width: 100%;
+    height: clamp(105px, 17vh, 165px);
+    min-height: 95px;
+    max-height: none;
+    border-radius: 13px;
+    border: 1px solid rgba(165, 180, 252, 0.32);
+}
+
+.participantThumbnailTile .participantName {
+    left: 7px;
+    bottom: 7px;
+    gap: 5px;
+    padding: 5px 7px;
+    font-size: 10px;
+}
+
+.participantThumbnailTile .participantAvatar {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+}
+
+.participantThumbnailTile .participantMuted {
+    top: 7px;
+    right: 7px;
+    width: 27px;
+    height: 27px;
+}
+
+.participantThumbnailTile .participantMuted svg {
+    font-size: 15px;
+}
+
+.participantFocusToolbar {
+    grid-area: actions;
+    min-width: 0;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 3px;
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.participantViewAction {
+    border-color: rgba(165, 180, 252, 0.55) !important;
+    color: #c7d2fe !important;
+    border-radius: 9px !important;
+    font-size: 12px !important;
+    text-transform: none !important;
+    white-space: nowrap;
+}
+
+.participantViewAction:hover {
+    border-color: #a5b4fc !important;
+    background: rgba(99, 102, 241, 0.14) !important;
+}
+
+@media (max-width: 768px) {
+    .participantFocusView,
+    .participantFocusViewWithRail {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto auto;
+        grid-template-areas:
+            "featured"
+            "rail"
+            "actions";
+        gap: 8px;
+    }
+
+    .participantThumbnailStrip {
+        width: 100%;
+        height: 105px;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 8px;
+    }
+
+    .participantThumbnailTile {
+        flex: 0 0 145px;
+        width: 145px;
+        height: 95px;
+        min-height: 90px;
+    }
+
+    .participantFocusToolbar {
+        min-height: 36px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px) {
+    .participantThumbnailTile {
+        flex-basis: 125px;
+        width: 125px;
+    }
+
+    .participantFocusToolbar {
+        gap: 6px;
+    }
+
+    .participantViewAction {
+        padding: 4px 9px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* Make participant role labels readable on every tile size. */
+.participantRole {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 5px;
+    background: rgba(129, 149, 255, 0.2);
+    color: #dbe4ff;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.videoTile[role="button"] {
+    transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.videoTile[role="button"]:hover,
+.videoTile[role="button"]:focus-visible {
+    outline: none;
+    border-color: rgba(129, 149, 255, 0.9);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3), 0 12px 30px rgba(0, 0, 0, 0.28);
+}

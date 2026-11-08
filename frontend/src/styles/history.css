@@ -1,0 +1,470 @@
+
+/* =========================================
+   CONNECTSPHERE - MEETING HISTORY
+========================================= */
+
+.historyPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #f8faff;
+    color: #172554;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Navbar */
+
+.historyNavbar {
+    height: 78px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #e8edf5;
+}
+
+.historyBrand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.historyBrandIcon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #e9efff;
+    font-size: 23px;
+}
+
+.historyBrand h2 {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 750;
+    letter-spacing: -0.8px;
+    color: #172554;
+}
+
+.historyBrand h2 span {
+    color: #5865e8;
+}
+
+.historyHomeButton {
+    color: #5865e8 !important;
+    border: 1px solid #e0e5ff !important;
+    border-radius: 9px !important;
+    padding: 8px 17px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+/* Main content */
+
+.historyMain {
+    flex: 1;
+    width: 86%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 55px 0;
+}
+
+/* Heading */
+
+.historyHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
+.historyEyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: #5865e8;
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: 1.3px;
+}
+
+.historyEyebrow svg {
+    font-size: 17px;
+}
+
+.historyHeading h1 {
+    margin: 0;
+    color: #172554;
+    font-size: clamp(32px, 4vw, 43px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.historyHeading p {
+    margin: 12px 0 0;
+    color: #78849b;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.historyHeadingIcon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #e9efff;
+    color: #5865e8;
+}
+
+.historyHeadingIcon svg {
+    font-size: 42px;
+}
+
+/* Search toolbar */
+
+.historyToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 35px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #edf0f6;
+    border-radius: 15px;
+}
+
+.historySearch {
+    max-width: 600px;
+}
+
+.historySearch .MuiOutlinedInput-root {
+    border-radius: 10px;
+    background: #fafbff;
+}
+
+.historySearch .MuiInputAdornment-root {
+    color: #8994aa;
+}
+
+.historyCount {
+    min-width: 110px;
+    text-align: center;
+}
+
+.historyCount span {
+    color: #5865e8;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.historyCount p {
+    margin: 3px 0 0;
+    color: #8994aa;
+    font-size: 11px;
+}
+
+/* Meeting list */
+
+.historyListHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.historyListHeader h2 {
+    margin: 0;
+    color: #202b45;
+    font-size: 19px;
+    font-weight: 750;
+}
+
+.historyListHeader span {
+    color: #8994aa;
+    font-size: 12px;
+}
+
+/* Meeting card */
+
+.historyCard {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    margin-bottom: 14px;
+    background: white;
+    border: 1px solid #edf0f6;
+    border-radius: 15px;
+    transition: all 0.2s ease;
+}
+
+.historyCard:hover {
+    transform: translateY(-3px);
+    border-color: #dce3ff;
+    box-shadow: 0 10px 25px rgba(45, 60, 110, 0.06);
+}
+
+.historyCardIcon {
+    width: 53px;
+    height: 53px;
+    min-width: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #edf0ff;
+    color: #5865e8;
+}
+
+.historyCardIcon svg {
+    font-size: 27px;
+}
+
+.historyCardDetails {
+    flex: 1;
+    min-width: 0;
+}
+
+.historyCardDetails h3 {
+    margin: 0 0 7px;
+    color: #202b45;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.historyMeetingCode {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    color: #8994aa;
+    font-size: 12px;
+}
+
+.historyMeetingCode strong {
+    color: #5865e8;
+    font-size: 13px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.historyMeetingCode .MuiIconButton-root {
+    padding: 4px;
+    color: #5865e8;
+}
+
+.historyDate {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 9px;
+    color: #8994aa;
+    font-size: 12px;
+}
+
+.historyDate svg {
+    font-size: 15px;
+}
+
+.historyDateSeparator {
+    color: #c1c8d6;
+}
+
+/* Rejoin button */
+
+.historyJoinButton {
+    min-width: 105px !important;
+    padding: 10px 16px !important;
+    border-radius: 9px !important;
+    background: #5865e8 !important;
+    color: white !important;
+    text-transform: none !important;
+    font-size: 13px !important;
+    font-weight: 650 !important;
+    box-shadow: none !important;
+}
+
+.historyJoinButton:hover {
+    background: #4552d5 !important;
+}
+
+/* Empty and loading states */
+
+.historyEmptyState,
+.historyStatus {
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border: 1px solid #edf0f6;
+    border-radius: 17px;
+}
+
+.historyEmptyIcon {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22px;
+    background: #edf0ff;
+    color: #5865e8;
+}
+
+.historyEmptyIcon svg {
+    font-size: 37px;
+}
+
+.historyEmptyState h2 {
+    margin: 20px 0 8px;
+    color: #202b45;
+    font-size: 20px;
+}
+
+.historyEmptyState p,
+.historyStatus p {
+    max-width: 400px;
+    color: #8994aa;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.historyEmptyState button,
+.historyError button {
+    margin-top: 15px;
+    background: #5865e8;
+    text-transform: none;
+}
+
+.historyStatus {
+    gap: 15px;
+}
+
+.historyError {
+    color: #dc2626;
+}
+
+/* Footer */
+
+.historyFooter {
+    min-height: 65px;
+    padding: 15px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-top: 1px solid #e8edf5;
+    color: #9aa2b3;
+    font-size: 12px;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+    .historyNavbar {
+        padding: 0 5%;
+    }
+
+    .historyMain {
+        width: 92%;
+        padding: 35px 0;
+    }
+
+    .historyHeadingIcon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .historyHeadingIcon svg {
+        font-size: 32px;
+    }
+
+    .historyToolbar {
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .historyCard {
+        padding: 17px;
+        gap: 12px;
+    }
+
+    .historyFooter {
+        padding: 15px 5%;
+    }
+}
+
+@media (max-width: 500px) {
+    .historyBrand h2 {
+        font-size: 19px;
+    }
+
+    .historyBrandIcon {
+        width: 36px;
+        height: 36px;
+        font-size: 19px;
+    }
+
+    .historyHeadingIcon {
+        display: none;
+    }
+
+    .historyHeading h1 {
+        font-size: 32px;
+    }
+
+    .historyHeading p {
+        font-size: 13px;
+    }
+
+    .historyToolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .historySearch {
+        max-width: 100%;
+    }
+
+    .historyCount {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        text-align: left;
+    }
+
+    .historyCount p {
+        margin: 0;
+    }
+
+    .historyCard {
+        flex-wrap: wrap;
+    }
+
+    .historyCardDetails {
+        width: calc(100% - 70px);
+    }
+
+    .historyJoinButton {
+        width: 100%;
+    }
+
+    .historyFooter {
+        flex-direction: column;
+        justify-content: center;
+        gap: 7px;
+    }
+}
